@@ -1,0 +1,265 @@
+.page-wrapper{
+  overflow-x: hidden;
+  font-size: 0.15rem;
+}
+.detail-img {
+  margin-bottom: 5px;
+}
+
+.detail-intro-item {
+  flex: 1;
+  padding: 4px 10px 0px 10px;
+}
+.detail-price-wrapper{
+  padding: 5px 10px 15px 10px;
+}
+.detail-intro-item .detail-title {
+  font-size: 18px;
+  color: #333;
+  vertical-align:middle;
+}
+
+.detail-intro-item .detail-price {
+  font-size: 18px;
+  color: #cea068;
+}
+
+.detail-orgin-price {
+  color: #bbb;
+  margin-left: 5px;
+  text-decoration: line-through;
+}
+
+.detail-intro-item .detail-category {
+  color: #cea068;
+  border: 1px solid #cea068;
+  margin-right: 10px;
+  font-size:11px;
+  padding:0 3px;
+  border-radius:2px;
+  vertical-align:baseline;
+}
+
+.detail-intro-item text {
+  color: #bbb;
+  /* vertical-align:middle; */
+}
+
+.detail-intro-item .get-money {
+  color: #d3a875;
+  margin-left: 10px;
+  background-image: url('http://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201807/13/1826564854/fenxiao_l%402x.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 2px 8px 3px 15px;
+  font-size: 12px;
+}
+
+.detail-des {
+  padding: 10px;
+  border-top: 10px solid #f8f8f8;
+  font-size: 16px;
+  padding-bottom: 50px;
+}
+
+.top-head {
+  border-top: 10px solid #f8f8f8;
+  background: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding: 15px;
+}
+
+.avatar-right {
+  display: inline-block;
+  vertical-align: middle;
+  /* color: #fff; */
+  margin-left: 5px;
+}
+
+.level {
+  width: 15px;
+  height: 15px;
+  vertical-align: text-bottom;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.avatar {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.defauet-avatar {
+  background: url('http://cdn.16988.cn/res/html/pc/images/morentouxiang.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.share {
+  background: #fff;
+  text-align: left;
+  padding-left: 5px;
+  border-top: 5px solid #f8f8f8;
+  height:55px;
+  line-height:55px;
+  overflow:hidden;
+}
+
+.share image {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+
+.bottom {
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 110px;
+}
+
+.bottom-left {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  padding: 0px 10px;
+  border-right: 1px solid #efefef;
+  border-top: 1px solid #efefef;
+}
+
+.bottom-left image {
+  margin-top: 8px;
+  margin-bottom: -3px;
+}
+
+.bottom-left text {
+  display: inline-block;
+}
+
+.bottom-right {
+  flex: 7;
+  text-align: center;
+  line-height: 110px;
+  background: #cea068;
+  color: #fff;
+  font-size: 18px;
+}
+
+button::after {
+  border: none;
+  border-radius: 0;
+}
+.goods-detail-image{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.5);
+  text-align:center;
+  padding:210px 100px 100px 100px;
+}
+.saveDetailImages{
+  margin-top: 20px;
+}
+.saveDetailImages text{
+  background-color: #D3A875;
+  color: #fff;
+  padding:8px 35px;
+  border-radius:50px;
+}
+
+.shop-icon{
+  font-size: 12px;
+}
+.contact-icon{
+  font-size: 12px;
+}
+.index-icon{
+  font-size: 12px;
+}
+.puton-shop-btn{
+  vertical-align: middle;
+}
+.clear-btn{
+  line-height: 48px;
+  padding: 0;
+  color:#252525;
+}
+
+.des-wrap{
+  display: flex;
+}
+.des-title{
+  flex: 1;
+}
+.des-copy{
+  color: #666666;
+  flex: 1;
+  text-align:right;
+  margin-right: 10px;
+}
+.des-copy text{
+  border:1px solid #666666;
+  padding:0px 4px;
+  border-radius: 2px;
+}
+.checkeded{
+    overflow: hidden;
+    padding-left: 10px;
+  }
+  .icon{
+      display: inline-block;
+    }
+    .icon::before{
+      display: inline-block;
+      width: 12px;
+      height: 11px;
+      
+      vertical-align: middle;
+      margin-right: 4px;
+      content: '';
+      background: url('../../images/checkeded@2x.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  .icon{
+      width: 28%;
+      float: left;
+    }
+/*  运费相关 */
+  .freight-fee{
+    margin-top: 5px;
+    padding:5px 10px;
+  }
+  .freight-fee-word{
+      color:#7E7E7E;
+      margin-right: 4px;
+    }
+  .freight-fee-tip{
+    color: #CEA068;
+    margin-left: 5px;
+  }
+.bottom-buy{
+  text-align: center;
+  background-color: #cea068;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  line-height: 50px;
+}

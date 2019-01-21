@@ -1,0 +1,131 @@
+.tab {
+        display: flex;
+        height: 44px;
+        line-height: 44px;
+        font-size: 14px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+    .tab-item {
+        flex: 1;
+        text-align: center;
+    }
+    .router-link-active {
+        color: #dda559;
+    }
+    .tab-link {
+        padding-bottom: 12px;
+        color: #dda559;
+        border-bottom: 2px solid #dda559
+    }
+.order-wrapper {
+  font-size: 14px;
+}
+.order-number {
+  padding: 15px 15px 15px 0;
+  margin: 0 15px;
+  border-bottom: 1px solid #efefef;
+  margin-right: 0;
+}
+.order-number .order-sign {
+  color: #999999;
+}
+.order-number .order-state {
+  float: right;
+  color: #cea068;
+}
+.avatar-head {
+  border-bottom: 1px solid #efefef;
+  padding: 15px 0;
+  margin: 0 15px;
+  margin-right: 0;
+}
+.avatar {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.avatar image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.avatar-right {
+  display: inline-block;
+  vertical-align: middle;
+}
+.avatar-right image {
+  width: 12px;
+}
+.list-wrapper {
+  padding: 15px 0;
+  margin: 0 15px;
+  border-bottom: 1px solid #efefef;
+  position: relative;
+  margin-right: 0;
+}
+.list-wrapper .goods-img-wrapper {
+  display: inline-block;
+}
+.list-wrapper .goods-img-wrapper .goods-img {
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  height: 90px;
+  overflow: hidden;
+}
+.goods-img-wrapper .goods-img image{
+    width: 100px;
+    height: 90px;
+}
+.list-wrapper .right {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 8px;
+}
+.list-wrapper .right h3 {
+  font-size: 14px;
+}
+.list-wrapper .right .intro-p {
+  color: #bfbfbf;
+  margin: 5px 0;
+  font-size: 12px;
+}
+.list-wrapper .right .price {
+  color: #cea068;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+.list-wrapper .goods-counts {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+  color: #bfbfbf;
+}
+.total-price {
+  color: #cea068;
+  font-size: 14px;
+  text-align: right;
+  float: none;
+  border-bottom: 1px solid #eee;
+  padding: 15px;
+  margin-left: 15px;
+}
+.user-confim {
+  clear: both;
+  margin: 15px;
+  text-align: right;
+  padding-bottom: 20px;
+}
+.user-confim span {
+  border: 1px solid #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #999999;
+}
+.user-confim .getDeli {
+  color: #fff;
+  background: #cea068;
+  border: none;
+}

@@ -1,0 +1,21 @@
+    <view class="collect-wrapper">
+      <view>
+         <view s-for="items in goodsHisLists"   class="sec-wrapper">
+            <!-- {{items}} -->
+            <view class="sec-wrapper-inner" bind:tap="gotoViewDetail" data-goodid="{{items.g_id}}">
+                <view s-if="items.goodsInfo.g_surfaceImg" class="sec-img" style="background:url({{items.goodsInfo.g_surfaceImg.gi_img}}); background-size: cover;background-position: center center;">
+                
+                </view>
+                <view s-else class="sec-img" style="background:url({{https://cdn.16988.cn/res/html/images/h5/zw.png}})">
+                
+                </view>
+                <view class="sec-right"  >
+                    <view s-if="items.goodsInfo.g_name">{{items.goodsInfo.g_name}}</view>
+                    <view style="color:#7E7E7E;" s-if="items.goodsInfo.categoryName2">{{items.goodsInfo.categoryName2}}</view>
+                    <view s-if="items.goodsInfo.g_price"><view class="price">￥{{items.goodsInfo.g_price}}</view></view>
+                   <!-- <s >原价￥{{items.item[0].g_price}}</s> -->
+                </view>
+            </view>
+        </view>
+      </view>
+    </view>

@@ -1,0 +1,61 @@
+.wrap{
+    font-size: 0.15rem;
+    background: #fff;
+}
+.login-tab{
+    display: flex;
+    font-size: 0.15rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #999;
+    
+}
+.login-tab view{
+        flex: 1;
+        padding: 15px 20px;
+    }
+.login-tab .active{
+    border-bottom: 2px solid #cea068;
+    padding-bottom: 15px;
+    color: #333;
+}
+.login-content{
+    padding: 25px 35px
+}
+.userAgreement{
+    text-align: center;
+    color: #a0a0a0;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0; 
+}
+/* .userAgreement a{
+    color: #000
+} */
+
+.tips{
+    margin-top: 0.15rem;
+}
+.login-btn{
+    border: 1px solid #eee;
+    background: #333;
+    margin-top: 20px;
+    border-radius: 4px;
+    color: #fff;
+}
+input::-webkit-input-placeholder {
+    color: #c7c7cd;
+}
+.yzm-btn{
+  color: #333;
+}
+.namul-input {
+    padding: 15px 0;
+    background: transparent;
+    /* width: 100%; */
+    height: 40px;
+}
+.out-input {
+    border-bottom: 1px solid #a1a1a1;
+}

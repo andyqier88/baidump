@@ -1,0 +1,54 @@
+@import "../../bdParse/bdParse.css";
+.ingenuity-detail-wrapper {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  overflow: scroll;
+  background: #fff;
+  z-index: 10;
+  -webkit-overflow-scrolling: touch;
+  font-size: 0.15rem;
+}
+.h2 {
+    font-size: 16px;
+    margin: 14px;
+    font-weight: bolder;
+    text-align: center;
+}
+.ingenuity-bg {
+  background: url("../images/mingjia@2x.png") no-repeat;
+  width: 100%;
+  height: 188px;
+  background-size: 100% 100%;
+}
+.ingenuity-detail-intro {
+  margin-top: -34px;
+  padding: 20px;
+  padding-top: 0;
+  border-bottom: 10px solid #f6f6f6;
+}
+p {
+    color: #a9aaae;
+    line-height: 22px;
+    word-break: break-all;
+  }
+.ingenuity-detail-avoter {
+    width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin: 0 auto;
+      background-size: cover;
+    background-position: center;
+  }
+  img {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+.shop-wrapper{
+    padding:0 0.2rem 0.2rem;
+}

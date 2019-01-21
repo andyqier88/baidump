@@ -1,0 +1,211 @@
+/**
+ * @file swan index apiDemo's css
+ * @author renzhonghua
+ */
+
+.group {
+    font-size: .15rem;
+}
+
+.group-hd {
+    height: 1.87rem;
+    padding: 0 .22rem 0 .29rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.group-logo {
+    width: .52rem;
+    height: .52rem;
+}
+
+.item-logo {
+    width: .26rem;
+    height: .26rem;
+}
+
+.group-desc {
+    text-align: center;
+    color: #999;
+    margin-top: .14rem;
+    line-height: 1.6;
+}
+image{
+    width: 100%;
+}
+.group-bd {
+    border-top: 7px solid #f5f5f5;
+    background: #fff;
+}
+
+.group-bd:last-child {
+    border-bottom: 7px solid #f5f5f5;
+}
+
+.item {
+    padding: .17rem .23rem .17rem .3rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.item-close:after {
+    height: 0;
+}
+
+.item-logo {
+    display: inline-block;
+}
+
+.item-desc {
+    font-size: .17rem;
+    margin-left: .18rem;
+}
+
+.item-toggle {
+    position: absolute;
+    right: .23rem;
+}
+
+.sub-item {
+    position: relative;
+    margin-left: .75rem;
+    padding: .125rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.sub-item:last-child:after {
+    height: 0;
+}
+
+.sub-item-goto {
+    position: absolute;
+    right: .23rem;
+}
+
+.sub-item-desc {
+    color: #666;
+}
+.recommend-title{
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        
+    }
+    .recommend-title text{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .recommend-title image{
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+.shop_item {
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+}
+.list {
+  background: #fff;
+  width: 48%;
+  margin-top: 0.1rem;
+}
+.image_box {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 100%;
+  }
+.price {
+    color: #cea068;
+    font-size: 0.15rem;
+    font-weight: 400; 
+  }
+  .cost_price {
+    color: #c7c7c7;
+    font-size: 0.15rem;
+    text-decoration: line-through;
+    font-weight: 100;
+  }
+.goods {
+    padding: 0.1rem;
+   
+    }
+     view {
+      box-sizing: initial;
+    }
+.iconfont:before {
+      color: #ea4141;
+      font-size: 0.15rem;
+      display: inline-block;
+      position: relative;
+      top: 0.15rem;
+    }
+  
+  .product_info {
+    display: flex;
+    align-items: flex-end;
+    height: 0.3rem;
+    line-height: 0.3rem;
+  }
+  .cost_price {
+    padding-left: 0.2rem;
+  }
+.sale_msg {
+    height: 0.3rem;
+    font-size: 0.15rem;
+    color: #c7c7c7;
+    line-height: 0.3rem;
+    padding: 0.1rem 0;
+  }
+  .product_name {
+    color: #1a1a1a;
+    font-size: 0.15rem;
+    height: 0.36rem;
+    padding-top: 0.1rem;
+    display: flex;
+    align-items: center;
+    
+  }
+  .prod_zys:after {
+      font-size: 0.15rem;
+      color: #cea068;
+    }
+    div {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .hot-title{
+    text-align: center;
+    background: #fff;
+    font-size: 18px;
+    
+    
+}
+.hot-title h2{
+        font-weight: 600;
+        padding-top: 15px;
+    }
+.hot-active{
+    display: flex;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 10px solid #f6f6f6;
+    font-size: 14px;
+    color: #232428;
+    background: #fff;
+    
+}
+.hot-active .hot-item{
+        flex: 1;
+        margin: 0 5px;
+}

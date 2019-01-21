@@ -1,0 +1,70 @@
+<view class="group">
+	<swiper indicator-dots="true" autoplay="true" interval="3000" duration="500">
+		<block s-for="imgUrl in imgsItem">
+			<swiper-item>
+				<image src="{{imgUrl.img}}" mode='widthFix' class="slide-image" style="width: 100%" bind:tap="gotoWebview" data-bannerurl="{{imgUrl.link}}"
+				/>
+			</swiper-item>
+		</block>
+	</swiper>
+	<!-- <swiper class="cate-list" :options="swiperOption" >
+		<block v-for="item in V2Category">
+			<swiper-item  :key="item.cg_id" class="cate-item" ref="mySwiper">
+			<img :src="item.cg_icon" alt=""  bind:tap="gotoV2CateIndex(item.cg_id)">
+				<text>{{item.cg_name}}</text>
+			</swiper-item>
+		</block>
+      </swiper> -->
+	  <!-- 热门活动 -->
+	  <view s-if="adHotList.length" class="hot-title">
+            <h2>热门活动</h2>
+        </view>
+        <view s-if="adHotList.length" class="hot-active">
+            <view s-for="em in adHotList" class="hot-item">
+		
+                <!-- <img src="../images/1.png" alt=""> :src="em.a_image" -->
+                <image src="{{em.a_image}}" bind:tap="goToAdvert(em.link)" mode='widthFix'></image>
+                <view>{{em.title}}</view>
+            	
+			</view>
+            
+            <!-- <div class="hot-item">
+                <img src="../images/2.png" alt="">
+                <p>新年福器</p>
+            </div>
+            <div class="hot-item">
+                <img src="../images/3.png" alt="">
+                <p>紫砂茶具</p>
+            </div> -->
+        </view>
+	<!-- 为你推荐 -->
+	<view style="padding-bottom:50px;">
+		<view class="recommend-title" bind:tap="gotoJian">
+			<text>为你推荐</text>
+			<image src="../../images/recom-all-icon.png" style='width:15px;height:15px;'></image>
+		</view>
+
+		<!--商品模块-->
+		<view class="shop_item">
+			<view class="list" s-for="item in discoverList" >
+                <!-- style="backgroundImage:url({{item.g_surfaceImg.gi_img}}!c400)" -->
+				<view class="image_box" bind:tap="gotoDetail" data-goodid='{{item.g_id}}'>
+					<image mode='widthFix' s-if="item.g_surfaceImg.gi_img" class="imageg" src="{{item.g_surfaceImg.gi_img}}!c400">< /image>
+				</view>
+				<view class="goods">
+					<view class="product_name">
+						<span class="iconfont icon-ziying prod_zys"></span>
+						<view>{{item.g_name}}</view>
+					</view>
+					<view s-if="item.g_slogan" class="sale_msg">{{item.g_slogan}}</view>
+					<view class="product_info">
+						<!-- <view s-if="item.isSecKill > 0" class="iconfont icon-redhost"></view> -->
+						<view s-if="item.isSecKill > 0" class="price">￥{{item.g_activityPrice}}</view>
+						<view s-else class="price">￥{{item.g_price}}</view>
+						<view s-if="item.isSecKill > 0" class="cost_price">￥{{item.g_price}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,55 @@
+/**
+ * @file swan index apiDemo's css
+ * @author renzhonghua
+ */
+
+
+.ingenuity-wrapper {
+  padding-bottom: 46px;
+  font-size: 0.15rem;
+}
+.ingenuity-item {
+    background: url("../images/mingjia@2x.png") no-repeat;
+    width: 100%;
+    height:2.5rem;
+    background-size: 100% 100%;
+    border-bottom: 10px solid #fff;
+    position: relative;
+  }
+.inge-arrow{
+  position: absolute;
+  left: 120px;
+  top: 70px;
+  
+}
+img{
+    width: 16px;
+    height: 16px;
+  }
+.artist-intro-bg {
+  width: 85px;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #fff;
+  margin-left: 15px;
+  padding: 5px;
+
+}
+  .artist-intro {
+    padding-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+  }
+
+  .celebrity-title {
+    font-size: 0.15rem;
+    margin: 5px 0;
+  }
+  .celebrity-title {
+    font-size: xx-small;
+  }
+  img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }

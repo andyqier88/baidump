@@ -1,0 +1,21 @@
+  <import src="../../bdParse/bdParse.swan" />
+  <view class="ingenuity-detail-wrapper">
+    <view class="ingenuity-bg" style="background:url({{infoMes.ua_bgImg}});background-size: 100% 100%;">
+      <!-- <images src="../images/mingjia@2x.png" alt=""> -->
+    </view>
+    <view class="ingenuity-detail-intro">
+      <view s-if="infoMes.u_avatar" class="ingenuity-detail-avoter" style="background:url({{infoMes.u_avatar}});background-size: 100% 100%;background-size: cover;background-position: center;">
+        <images src="{{infoMes.u_avatar}}"  ></images>
+      </view>
+      <view s-if="infoMes.ua_desc" class="h2">艺术家简介</view>
+      <text s-html="infoMes.ua_desc">{{infoMes.ua_desc}}</text>
+
+      <template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
+    </view>
+    <!-- <view>
+      <h2 v-if="ShopLists.length">艺术家作品</h2>
+      <view class="shop-wrapper">
+        <two-clumns :ShopLists="ShopLists"></two-clumns>
+      </view>
+    </view> -->
+  </view>

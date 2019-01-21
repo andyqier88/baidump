@@ -1,0 +1,72 @@
+<!--pages/shopdetail/shopdetail.wxml-->
+
+<view class='page-wrapper'>
+
+	<!-- <image mode='widthFix' src="{{detailData.g_surfaceImg.gi_img}}" class="slide-image" style="width: {{imageWidth}}px;" /> -->
+  <swiper s-if="detailCarousel.length" indicator-dots="true" autoplay="true" interval="3000" duration="500" style="height:280px">
+		<block s-for="imgUrl in detailCarousel">
+			<swiper-item >
+				<image src="{{imgUrl.gi_img}}" mode='widthFix' class="slide-image" style="width: 100%;" />
+			</swiper-item>
+		</block>
+	</swiper>
+  <image s-else mode='widthFix' src="{{detailData.g_surfaceImg.gi_img}}" class="slide-image" style="width: {{imageWidth}}px;" />
+	<view class='detail-intro' style="position:{{bottomStylePos}};bottom:{{bottomStyleHei}}px;">
+		<view class='detail-intro-item'>
+			<text class='detail-category' s-if="{{detailData.is_own_shop=='1'}}">自营</text>
+			<text class='detail-title'>{{detailData.g_name}}</text>
+		</view>
+		<view class='detail-intro-item'>
+			<text>{{detailData.categoryName}} </text>
+			<text>剩余：{{detailData.g_stock}}件</text>
+		</view>
+		<view class='detail-intro-item detail-price-wrapper'>
+			<text class='detail-price' s-if="{{detailData.isSecKill =='1'}}">秒杀价 ¥{{detailData.g_secKillPrice}} </text>
+			<text class='detail-price' s-else>¥{{detailData.g_price}}</text>
+
+		</view>
+		<view class="checkeded">
+			<view>
+				<text class="icon">真品保证</text>
+				<text class="icon">七天退换货</text>
+			</view>
+		</view>
+			<!-- 运费相关 -->
+			<view class="freight-fee">
+				<text class="freight-fee-word">运费</text>
+				<text s-if="Number(detailData.g_freightFee)">收{{detailData.g_freightFee}}元运费 <text class="freight-fee-tip">不支持与其他商品混购</text></text>
+				<text s-else>免邮</text>
+			</view>
+		</view>
+
+		<view>
+			<view class="top-head">
+				<view class="avatar user-avatar" s-if="{{detailData.g_avatar}}" style='background: url({{detailData.g_avatar}});background-size:cover;'>
+				</view>
+				<view class="avatar defauet-avatar" s-else>
+				</view>
+				<view class="avatar-right">
+					<text class='h2'>{{detailData.g_realname}}</text>
+					<image s-if="{{detailData.saler_certification == '1'}}" class='level' src="../../images/level.png"></image>
+					<view class='h3'>
+						<text s-if="{{detailData.saler_certification == '1'}}">艺术家</text>
+						<text s-elif="{{detailData.saler_certification == '2'}}">机构</text>
+						<text s-elif="{{detailData.saler_certification == '0'}}">已通过实名认证</text>
+						<text s-else>未实名认证</text> </view>
+				</view>
+			</view>
+		</view>
+		<!--商品详情类别 件数  -->
+		<view class='detail-des'>
+			<text s-if="{{detailData.g_inspiration}}">
+    	{{detailData.g_inspiration}}
+  	</text>
+			<view s-for="item in detailDataImg">
+				<image mode='widthFix' src="{{item.gi_img}}" class="slide-image" style="width: 100%;" />
+			</view>
+		</view>
+		<!--intro bottom  -->
+    <view class="bottom-buy">
+      <text>立即购买</text>
+    </view>
+	</view>

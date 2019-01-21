@@ -1,0 +1,43 @@
+<view class="group">
+    <view class="center-wrapper">
+        <view s-if="!isLogin" class="my-header-wrapper">
+            <view  class="myinfos-null" bind:tap="gotoLogin">
+                <view  class="avatar defauet-avatar"></view>
+                <text>登录 | 注册</text>
+            </view>
+        </view>
+        <view s-else class="top-head">
+            <view s-if="myInfos.u_avatar" class="avatar" style="background: url({{myInfos.u_avatar}});background-size: cover;background-repeat: no-repeat;">
+                <view class="level">
+                    <image src="./../page/zwHomeH5/images/v.png" alt="">
+                </view>
+            </view>
+            <view s-else class="avatar defauet-avatar">
+            </view>
+            
+            <view class="avatar-right">
+                <h2 s-if="myInfos.u_nickname">{{myInfos.u_nickname}}</h2>
+                <h2 s-else-if="myInfos.u_realname">{{myInfos.u_realname}}</h2>
+                <h2 s-else>无一成</h2>
+                <p>{{myInfos.u_integral}}积分</p>
+            </view>
+        </view>
+        <view class="my-list-item">
+            <view class="list-item-single" bind:tap="goToMyOrder">
+                <image src="../../images/order.png" ></image>
+                <text>我的订单</text>
+                <image class="arrow" src="../../images/Shape1@2x.png" ></image>
+            </view>
+            <!-- <view class="list-item-single" bind:tap="myCoupn">
+                <image src="../../images/cou.png" ></image>
+                <text>我的代金券</text>
+                <image class="arrow" src="../../images/Shape1@2x.png" ></image>
+            </view> -->
+            <view class="list-item-single" bind:tap="goToMyViews">
+                <image src="../../images/zuji.png" ></image>
+                <text>我的足迹</text>
+                <image class="arrow" src="../../images/Shape1@2x.png" ></image>
+            </view>
+        </view>
+    </view>
+</view>
