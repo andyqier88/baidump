@@ -1,0 +1,39 @@
+/**
+ * @file swan index apiDemo's css
+ * @author renzhonghua
+ */
+.address {
+        font-size: 14px;
+    }
+    .address-common {
+        background: #fff;
+        padding: 20px 20px;
+        border-bottom: 1px solid #efefef;
+       
+    }
+     span {
+            display: inline-block;
+            width: 65px;
+        }
+        input {
+            margin-left: 20px;
+        }
+    .save {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        
+    }
+    span {
+            padding: 10px 20px;
+            background: #dda559;
+            color: #fff;
+            border-radius: 5px;
+        }
+    select{
+        vertical-align: top;
+        width: 65px;
+        border: none;
+        outline: none;
+        margin-right: 5px;
+    }

@@ -10,6 +10,7 @@ App({
     },
 
     globalData: {
-        userInfo: 'user'
+        userInfo: 'user',
+        goodCount:1
     }
 });

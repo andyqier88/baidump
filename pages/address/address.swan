@@ -1,0 +1,33 @@
+<view class="address">
+        <view class="address-common">
+            <view>收货人</view>
+            <input type="text" placeholder="请输入收货人姓名" v-model="name" />
+        </view>
+        <view class="address-common">
+            <view>手机号</view>
+            <input type="text" placeholder="请输入手机号" v-model="phone"/>
+        </view>
+        <view class="address-common">
+            <view>所在地区</view>
+            <select   @change="selectProCode" ref="ProCode">
+                <option value="请选择">请选择</option>
+                <option v-if="provinceName" selected = "selected" v-bind:value="addressMessage.a_provinceCode">{{provinceName}}</option>
+                <option  bind:tap="selectProCode" v-for="(item,index) in provinces" v-bind:value="index" :key="item" >{{item}}</option>
+            </select>
+            <select  bind:tap="selectCityCode"  @change="selectCityCode" ref="CityCode">
+                <option v-if="cityName" v-bind:value="addressMessage.a_cityCode">{{cityName}}</option>
+                <option bind:tap="selectCityCode"  v-for="(item,index) in citys" v-bind:value="index" :key="item">{{item}}</option>
+            </select>
+            <select  ref="areaCode">
+                <option v-if="areaName" v-bind:value="addressMessage.a_areaCode">{{areaName}}</option>
+                <option v-for="(item,index) in area" v-bind:value="index" :key="item">{{item}}</option>
+            </select>
+        </view>
+        <view class="address-common">
+            <view>详细地址</view>
+            <input type="text" placeholder="请输入详细地址" v-model="address" />
+        </view>
+        <view class="save">
+            <view bind:tap="postAddress()">保存</view>
+        </view>
+    </view>

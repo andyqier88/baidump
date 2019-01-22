@@ -18,17 +18,20 @@ Page({
                 {name:"售后中",status:"14,15,24,25,35"},
                 {name:"已完成",status:"3"}],
         tabNum:0,
+        hideMore:true
     },
     // onLoad: function () {
     //     this.getAllOrderLists()
     // },
-    onShow: function () {
+    onLoad: function () {
         this.getAllOrderLists("0,1,2,3,14,15,16,21,22,23,24,25,35,36,100")
     },
     // tab 切换
     tabClick(e) {
         this.setData({
             tabNum: e.currentTarget.dataset.inx,
+            page:1,
+            allOrderLists:[]
         })
         console.log(e.currentTarget.dataset.state)
         console.log(e)
@@ -36,13 +39,11 @@ Page({
     },
     // 优惠券列表
     getAllOrderLists(statusData) {
+        var that = this;
         swan.showLoading({
             title: '加载中',
             mask: true
         });
-        this.setData({
-            allOrderLists:[]
-        })
         swan.request({
             url: 'https://app.16988.cn/mall/order/order/lists', // 仅为示例，并非真实的接口地址
             method: 'POST',
@@ -51,7 +52,7 @@ Page({
                 listType: 1,
                 uid: swan.getStorageSync('loginData').u_id,
                 status:statusData||' ',
-                page: 1,
+                page: that.data.page++||1,
                 pageSize: 10
             },
             header: {
@@ -62,10 +63,19 @@ Page({
                 console.log(res.data);
                 if (res.data.error_code == 0) {
                     this.setData({
-                        allOrderLists: res.data.data,
+                        allOrderLists:that.data.allOrderLists.concat(res.data.data),
                         listLength: res.data.data.length
                     })
                     swan.hideLoading()
+                    if(that.data.listLength==0){
+                        that.setData({
+                            hideMore:false
+                        })
+                    }else{
+                       that.setData({
+                            hideMore:true
+                        }) 
+                    }
                 } else {
                     swan.showToast({
                         title: res.data.error_msg,
@@ -81,4 +91,8 @@ Page({
             }
         })
     },
+    loadMore(){
+        var that = this;
+        this.getAllOrderLists(that.data.tabItems[that.data.tabNum].status)
+    }
 });

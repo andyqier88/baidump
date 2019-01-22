@@ -3,14 +3,15 @@
 <view class='page-wrapper'>
 
 	<!-- <image mode='widthFix' src="{{detailData.g_surfaceImg.gi_img}}" class="slide-image" style="width: {{imageWidth}}px;" /> -->
-  <swiper s-if="detailCarousel.length" indicator-dots="true" autoplay="true" interval="3000" duration="500" style="height:280px">
+	<swiper s-if="detailCarousel.length" indicator-dots="true" autoplay="true" interval="3000" duration="500" style="height:280px">
 		<block s-for="imgUrl in detailCarousel">
-			<swiper-item >
+			<swiper-item>
 				<image src="{{imgUrl.gi_img}}" mode='widthFix' class="slide-image" style="width: 100%;" />
 			</swiper-item>
 		</block>
 	</swiper>
-  <image s-else mode='widthFix' src="{{detailData.g_surfaceImg.gi_img}}" class="slide-image" style="width: {{imageWidth}}px;" />
+	<image s-else mode='widthFix' src="{{detailData.g_surfaceImg.gi_img}}" class="slide-image" style="width: {{imageWidth}}px;"
+	/>
 	<view class='detail-intro' style="position:{{bottomStylePos}};bottom:{{bottomStyleHei}}px;">
 		<view class='detail-intro-item'>
 			<text class='detail-category' s-if="{{detailData.is_own_shop=='1'}}">自营</text>
@@ -31,42 +32,88 @@
 				<text class="icon">七天退换货</text>
 			</view>
 		</view>
-			<!-- 运费相关 -->
-			<view class="freight-fee">
-				<text class="freight-fee-word">运费</text>
-				<text s-if="Number(detailData.g_freightFee)">收{{detailData.g_freightFee}}元运费 <text class="freight-fee-tip">不支持与其他商品混购</text></text>
-				<text s-else>免邮</text>
-			</view>
+		<!-- 运费相关 -->
+		<view class="freight-fee">
+			<text class="freight-fee-word">运费</text>
+			<text s-if="Number(detailData.g_freightFee)">收{{detailData.g_freightFee}}元运费 <text class="freight-fee-tip">不支持与其他商品混购</text></text>
+			<text s-else>免邮</text>
 		</view>
+	</view>
 
-		<view>
-			<view class="top-head">
-				<view class="avatar user-avatar" s-if="{{detailData.g_avatar}}" style='background: url({{detailData.g_avatar}});background-size:cover;'>
-				</view>
-				<view class="avatar defauet-avatar" s-else>
-				</view>
-				<view class="avatar-right">
-					<text class='h2'>{{detailData.g_realname}}</text>
-					<image s-if="{{detailData.saler_certification == '1'}}" class='level' src="../../images/level.png"></image>
-					<view class='h3'>
-						<text s-if="{{detailData.saler_certification == '1'}}">艺术家</text>
-						<text s-elif="{{detailData.saler_certification == '2'}}">机构</text>
-						<text s-elif="{{detailData.saler_certification == '0'}}">已通过实名认证</text>
-						<text s-else>未实名认证</text> </view>
-				</view>
+	<view>
+		<view class="top-head">
+			<view class="avatar user-avatar" s-if="{{detailData.g_avatar}}" style='background: url({{detailData.g_avatar}});background-size:cover;'>
+			</view>
+			<view class="avatar defauet-avatar" s-else>
+			</view>
+			<view class="avatar-right">
+				<text class='h2'>{{detailData.g_realname}}</text>
+				<image s-if="{{detailData.saler_certification == '1'}}" class='level' src="../../images/level.png"></image>
+				<view class='view'>
+					<text s-if="{{detailData.saler_certification == '1'}}">艺术家</text>
+					<text s-elif="{{detailData.saler_certification == '2'}}">机构</text>
+					<text s-elif="{{detailData.saler_certification == '0'}}">已通过实名认证</text>
+					<text s-else>未实名认证</text> </view>
 			</view>
 		</view>
-		<!--商品详情类别 件数  -->
-		<view class='detail-des'>
-			<text s-if="{{detailData.g_inspiration}}">
+	</view>
+	<!--商品详情类别 件数  -->
+	<view class='detail-des'>
+		<text s-if="{{detailData.g_inspiration}}">
     	{{detailData.g_inspiration}}
   	</text>
-			<view s-for="item in detailDataImg">
-				<image mode='widthFix' src="{{item.gi_img}}" class="slide-image" style="width: 100%;" />
+		<view s-for="item in detailDataImg">
+			<image mode='widthFix' src="{{item.gi_img}}" class="slide-image" style="width: 100%;" />
+		</view>
+	</view>
+	<!--intro bottom  -->
+	<view class="bottom-buy" bind:tap="showMask">
+		<text>立即购买</text>
+	</view>
+	<!-- 弹窗 -->
+	<view class="bottomCartMask" s-if="maskCart">
+		<view class="cartlist-wrapper">
+			<!-- 关闭按钮 -->
+			<view class="closeCartBtn" bind:tap="closeCart">
+				<image src="../../images/close.jpg" alt="">
+			</view>
+			<view style="padding: 15px 20px;">
+				<view class="goods-img-wrapper">
+					<view class="goods-img">
+						<image s-if="detailData.g_surfaceImg" src="{{detailData.g_surfaceImg.gi_img}}">
+						<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png">
+					</view>
+					<!--图片 -->
+				</view>
+				<view class="right">
+					<view class="h3">{{detailData.g_name}}</view>
+					<view class="intro-p">
+						<view class="">{{detailData.categoryName}}
+							<view s-if="chiCunData.length>0"> |
+								<view s-for="em in chiCunData" >
+									<view s-if="em.ga_key == '尺寸'">{{em.ga_value}}</view>
+								</view>
+							</view>
+						</view>
+						<!-- <view class="size" s-if="itemArr.itemAttr">{{itemArr.itemAttr[0].ga_value}}</view> -->
+					</view>
+					<view class="price" s-if="detailData.isSecKill">￥{{detailData.g_activityPrice}}</view>
+					<view class="price" s-else>￥{{detailData.g_price}}</view>
+
+				</view>
+
+				<view class="cartCount">
+					<view class="cartLable">购买数量</view>
+					<view class="goods-counts">
+						<view class="change-count" bind:tap="minAcount" style="font-size: 22px;">-</view>
+							<text class="good-count">{{goodCount}}</text>
+						<view class="change-count" bind:tap="pluAcount">+</view>
+					</view>
+				</view>
+			</view>
+			<view s-show="maskCartSure" bind:tap="buyNow" data-goodid="{{detailData.g_id}}" class="cartSure">
+				<view>确定</view>
 			</view>
 		</view>
-		<!--intro bottom  -->
-    <view class="bottom-buy">
-      <text>立即购买</text>
-    </view>
 	</view>
+</view>

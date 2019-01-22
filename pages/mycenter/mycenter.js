@@ -54,10 +54,16 @@ Page({
         })
     },
     // 我的足迹MyLocalStorage.Cache.get('u_id')
-    goToMyViews() { 
-        swan.navigateTo({
-            url: '/pages/myviews/myviews',
-        })
+    goToMyViews() {
+        if(swan.getStorageSync('ZWCOOKIES')){
+            swan.navigateTo({
+                url: '/pages/myviews/myviews',
+            })
+        }else{
+            swan.showToast({
+                title: '请先登录'
+            });
+        }
     },
     // 我的订单
     goToMyOrder() {

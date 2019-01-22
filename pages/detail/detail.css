@@ -263,3 +263,130 @@ button::after {
   height: 50px;
   line-height: 50px;
 }
+.bottomCartMask {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    z-index: 1;
+  }
+  .closeCartBtn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 28px;
+    text-align: center;
+    height: 20px;
+  }
+  .closeCartBtn image{
+    width: 10px;
+    height: 10px;
+  }
+  .cartSure {
+    margin-top: 28px;
+    background: #dda559;
+    text-align: center;
+    padding: 15px 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-left: 0px;
+    color: #fff;
+  }
+  .totalCount {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    padding: 1px 5px;
+    background: #dda559;
+    border-radius: 50%;
+    color: #fff;
+  }
+  .cartCount {
+    margin-top: 20px;
+    overflow: hidden;
+
+  }
+      .cartLable {
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 15px;
+    }
+    .goods-counts {
+      position: absolute;
+      right: 20px;
+      display: inline-table;
+    }
+  .cartlist-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    background: #fff;
+  }
+  .goods-img-wrapper {
+      display: inline-block;
+
+    }
+    .goods-img {
+        width: 100px;
+        display: inline-block;
+        vertical-align: top;
+        height: 100px;
+        overflow: hidden;
+      }
+      .goods-img image{
+        width: 100px;
+        height: 100px;
+      }
+    .right {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 8px;
+ 
+    }
+    .right .h3 {
+        font-size: 14px;
+        font-weight: 800;
+        overflow: hidden; 
+        text-overflow:ellipsis; 
+        white-space:nowrap;width:130px;
+        color: #dda559;
+      }
+      .intro-p {
+        color: #bfbfbf;
+        margin: 5px 0;
+      }
+      .price {
+        color: #dda559;
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    .goods-counts {
+      color: #bfbfbf;
+      
+    }
+  .change-count {
+        display: inline-block;
+        width: 33px;
+        height: 30px;
+        vertical-align: middle;
+        border: 1px solid #eee;
+        font-size: 18px;
+        text-align: center;
+        color: #000;
+        line-height: 30px;
+      }
+      .good-count{
+        width: 55px;
+        height: 30px;
+        background: rgba(237,237,237,1);
+        display: inline-block;
+        text-align: center;
+        line-height: 27px;
+        color: #000;
+        margin: 0 5px;
+      }

@@ -18,12 +18,19 @@ Page({
         autoplay: false,
         interval: 5000,
         duration: 1000,
-        // pageHeight:0
         isLogin: true,
         uid: '',
         canIUseNav: swan.canIUse('navigator'),
         plain: true,
         showAll: false,
+        maskState: true, //弹窗状态
+        maskCartSure:false,
+        buyMaskCart:false,
+        cartLists: [], //加入购物车,
+        maskCart: false, //购物车弹窗隐藏
+        goodCount: 1, //购物车数量
+        totalGoodCount: 0,
+        cartCount: 0,
     },
 
     // 详情数据加载
@@ -68,6 +75,7 @@ Page({
             goodsid: options.link,
             uid: swan.getStorageSync('loginData').u_id
         })
+        swan.setStorageSync('goodCountFromStro',1);
     },
     // 跳转首页
     gotoIndex: function () {
@@ -76,11 +84,53 @@ Page({
             url: '../index/index'
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    showMask(){
+        this.setData({
+            maskCart:true
+        })
+    },
+    // 关闭弹窗
+    closeCart(){
+        this.setData({
+            maskCart:false
+        })
+    },
+    // 购物车加法
+    pluAcount(){
+        var that = this;
+        this.data.goodCount++
+        that.setData({
+            goodCount:that.data.goodCount++
+        })
+        swan.setStorageSync('goodCountFromStro',that.data.goodCount);
+        // console.log(that.data.goodCount++)
+    },
+    // 购物车减法
+    minAcount(){
+        var that = this;
+        
+        if(that.data.goodCount>1){
+            that.data.goodCount--
+            that.setData({
+                goodCount:that.data.goodCount--
+            })
+        }
+        // console.log(this.data.goodCount--)
+        swan.setStorageSync('goodCountFromStro',that.data.goodCount);
+    },
+    //提交订单
+    buyNow(e){
+        console.log('moe')
+        var that = this;
+        if (swan.getStorageSync('ZWCOOKIES')) {
+          swan.navigateTo({
+            url:`/pages/submitorder/submitorder?link=${e.currentTarget.dataset.goodid}` ,
+          })
+        } else {
+          swan.navigateTo({
+            url: '/pages/login/login',
+          })
+        }
     },
 
     /**
@@ -89,45 +139,4 @@ Page({
     onShow: function () {
         this.getDetail()
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function (e) {
-        var that = this;
-        console.log('detailData', that.data.detailData)
-        return {
-            title: that.data.detailData.g_name,
-            path: '/pages/jumpyswh/jumpyswh?goodsid=' + that.data.detailData.g_id + '&uid=' + that.data.uid,
-            imageUrl: that.data.detailData.surfaceImageUrl
-        }
-    }
 })

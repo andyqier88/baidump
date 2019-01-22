@@ -10,7 +10,9 @@
         "pages/myviews/myviews",
         "pages/ingenuitydetail/ingenuitydetail",
         "pages/login/login",
-        "pages/mycoupon/mycoupon"
+        "pages/mycoupon/mycoupon",
+        "pages/submitorder/submitorder",
+        "pages/address/address"        
     ],
     "window": {
         "navigationBarBackgroundColor": "#ffffff",

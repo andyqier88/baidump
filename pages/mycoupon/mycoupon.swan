@@ -4,7 +4,7 @@
             <text >{{item.name}}</text>
         </view>
     </view>
-	<view s-if="!allOrderLists.length">暂无订单</view>
+	<view s-if="!allOrderLists.length"  style="text-align: center;margin: 10px;">暂无订单</view>
 	<view s-else s-for="item in allOrderLists" style="background:#fff;font-size: 14px;">
 		<view class="order-number">
 			<text class="order-sign">订单号: <text ref="orderSn">{{item.o_sn}}</text> </text>
@@ -94,9 +94,12 @@
 				<!-- <view>联系卖家</view> -->
 			</view>
 		</view>
+		
 	</view>
 	<view style="text-align: center;margin: 10px;">
 		<!-- <view s-if="isLoading">正在加载</view>
 		<view s-else>暂无数据</view> -->
 	</view>
+	<view s-if="hideMore&&allOrderLists.length" bind:tap="loadMore" class="load-more">点击加载更多</view>
+	<view s-if="!hideMore&&page>1" bind:tap="loadMore" class="load-more">没有更多了</view>
 </view>
