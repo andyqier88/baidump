@@ -83,6 +83,25 @@ Page({
                         loading: false,
                     })
                     swan.hideLoading()
+                    if(res.data.data.length == 0){
+                        swan.showModal({
+                            title: '',
+                            content: '您未设置收货地址，请设置收货地址',
+                            cancelColor: '#000000',
+                            confirmColor: '#CEA068',
+                            confirmText:"设置地址",
+                            success: function (res) {
+                                if (res.confirm) {
+                                    console.log('用户点击了确定');
+                                    swan.navigateTo({
+                                        url: '/pages/address/address'
+                                    });
+                                } else if (res.cancel) {
+                                    console.log('用户点击了取消');
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });

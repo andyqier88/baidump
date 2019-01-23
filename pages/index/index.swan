@@ -8,16 +8,22 @@
 		</block>
 	</swiper>
 	<!-- <swiper class="cate-list" :options="swiperOption" >
-		<block v-for="item in V2Category">
-			<swiper-item  :key="item.cg_id" class="cate-item" ref="mySwiper">
-			<img :src="item.cg_icon" alt=""  bind:tap="gotoV2CateIndex(item.cg_id)">
+		<block s-for="item in V2Category">
+			<swiper-item  :key="item.cg_id" class="cate-item" >
+				<image :src="item.cg_icon" alt=""  bind:tap="gotoV2CateIndex(item.cg_id)"></image>
 				<text>{{item.cg_name}}</text>
 			</swiper-item>
 		</block>
       </swiper> -->
+	  <view class="cate-list">
+            <view s-for="item in V2Category" data-cgid="{{item.cg_id}}" data-cids="{{item.c_ids}}" class="cate-item"  bind:tap="gotoV2CateIndex">
+                <image style="width:55px;height:55px;" src="{{item.cg_icon}}" ></image>
+                <view>{{item.cg_name}}</view>
+            </view>
+        </view>
 	  <!-- 热门活动 -->
 	  <view s-if="adHotList.length" class="hot-title">
-            <h2>热门活动</h2>
+            <text>热门活动</text>
         </view>
         <view s-if="adHotList.length" class="hot-active">
             <view s-for="em in adHotList" class="hot-item">
@@ -28,14 +34,14 @@
             	
 			</view>
             
-            <!-- <div class="hot-item">
+            <!-- <view class="hot-item">
                 <img src="../images/2.png" alt="">
                 <p>新年福器</p>
-            </div>
-            <div class="hot-item">
+            </view>
+            <view class="hot-item">
                 <img src="../images/3.png" alt="">
                 <p>紫砂茶具</p>
-            </div> -->
+            </view> -->
         </view>
 	<!-- 为你推荐 -->
 	<view style="padding-bottom:50px;">

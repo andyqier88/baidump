@@ -1,0 +1,58 @@
+
+  <view>
+    <view class="pos-box">
+    </view>
+    <view class="container">
+      <view  class="inx-nav-box">
+        <view class="nav_list">
+          <view class="don-v" class="{{priceOrder ? 'active' : ''}}" bind:tap="selSch" data-sortnum = "0">价格</view>
+          <view class="don-v" class="{{navTxt !== '筛选' ? 'active' : ''}}" bind:tap="showSch">{{navTxt}}</view>
+        </view>
+        <view class="inx-nav-alt" s-if="isSec">
+          <view class="selem" class="{{sortPrices === 2 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "2"><span>0-500元</span></view>
+          <view class="selem" class="{{sortPrices === 3 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "3"><span>500-2000元</span></view>
+          <view class="selem" class="{{sortPrices === 4 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "4"><span>2000-5000元</span></view>
+          <view class="inx-nav-pay">
+            <input class="input" type="text"  v-model="lowPrice" placeholder="最低价" />
+            <view class="sav-line"></view>
+            <input class="input" type="text" v-model="highPrice" placeholder="最高价" />
+            <view class="savSec" bind:tap="savSec">完成</view>
+          </view>
+        </view>
+        <view s-if="isSec" class="inx-nav-mask" bind:tap="closeMask"></view>
+        <!-- 新增品类筛选 -->
+        <view class="inx-nav-alt" v-show="isSecPin" >
+        </view>
+        <!-- <view class="sub-cate" s-if="noTopCate">
+            <view s-for="item in subcategoryList"  class="selem" bind:tap="subSearch(item,ind)" >
+              <span class="subCateNum == ind ? 'active' : ''">{{item.c_name}}</span>
+            </view>
+          </view> -->
+        <view s-if="isSecPin" class="inx-nav-mask" bind:tap="closeMask"></view>
+      </view>
+      <!--商品模块-->
+      <view class="shop_item">
+        <view class="list" s-for="em in discoverList" bind:tap="goDatil(em.g_id)">
+          <view class="image_box" bind:tap="gotoDetail(em.g_id)" style="background:url({{em.g_surfaceImg.gi_img}});background-size:cover;">
+          </view>
+          <view class="goods">
+            <view class="product_name">
+              <span class="iconfont icon-ziying prod_zys"></span>
+              <view>{{em.g_name}}</view>
+            </view>
+            <view s-if="em.g_slogan" class="sale_msg">{{em.g_slogan}}</view>
+            <view class="product_info">
+              <view s-if="em.isSeckill > 0" class="iconfont icon-redhost"></view>
+              <view s-if="em.isSeckill > 0" class="price">￥{{em.g_activityPrice}}</view>
+              <view s-else class="price">￥{{em.g_price}}</view>
+              <view s-if="em.isSeckill > 0" class="cost_price">￥{{em.g_price}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+   <view s-if="is_empty" style="text-align: center;padding-top: 50px;color:#9c9c9c">
+      <image src="../../images/no-data.png" alt="" style="width: 155px;"></image>
+      <p>暂无发现数据</p>
+    </view>
+  </view>

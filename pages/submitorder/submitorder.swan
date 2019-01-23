@@ -1,11 +1,13 @@
 <view class="submitorder">
 	<!-- 收货地址 bind:tap="openAddress"-->
 	<view class="loading" s-if="loading">加载中...</view>
-	<view class="defaultAddress" bind:tap="choAddress">
+	<view class="add_address" s-if = "!isAddressNull" bind:tap="choAddress">
+		<image class="add_icon" src="../../images/cross.png"></image>
+		<view>填写地址</view>
+	</view>
+	<view s-if = "isAddressNull" class="defaultAddress" bind:tap="choAddress">
 		<view class="address-top">
 			<image style="width: 15px;height: 20px;margin-right: 5px;" src="../../images/shouhuoren.png"></image>
-			<!-- <view>收货人：{{addressMessage.a_name}}</view>
-				<view>{{addressMessage.a_phone}}</view> -->
 			<view class="address-icon address-flex">
 				<view>收货人：{{addressMessage.a_name}}</view>
 			</view>
@@ -17,12 +19,14 @@
 		</view>
 		<view class="add-right-arrow"></view>
 	</view>
+	<view class="border-splice">
+		<image src="../../images/border.png"></image>
+	</view>
 	<!-- 购买商品列表 -->
 	<view class="buy-goods">
 		<view class="avatar-head">
 			<view class="avatar">
 				<image src="{{goodsItem.g_avatar}}">
-					<!-- <image s-lazy="goodsItem.g_avatar"> -->
 			</view>
 			<view class="avatar-right">
 				<view s-if="goodsItem.g_realname">{{goodsItem.g_realname}}</view>
@@ -35,8 +39,6 @@
 			<view class="goods-img-wrapper">
 				<view class="goods-img">
 					<image s-if="goodsItem.g_surfaceImg" src="{{goodsItem.g_surfaceImg.gi_img}}">
-						<!-- <image s-lazy="goodsItem.g_surfaceImg.gi_img"> -->
-						<!-- <image s-if="goodsItem.g_surfaceImg" s-lazy="goodsItem.g_surfaceImg.gi_img"> -->
 						<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png">
 				</view>
 				<!--图片 -->
@@ -45,50 +47,32 @@
 				<view>{{goodsItem.g_name}}</view>
 				<p class="intro-p">
 					<view class="">{{goodsItem.categoryName}}</view>
-					<!-- <view class="size" s-if="itemArr.itemAttr">{{itemArr.itemAttr[0].ga_value}}</view> -->
 				</p>
 				<view class="price" s-if="goodsItem.isSecKill">￥{{goodsItem.g_activityPrice}}</view>
 				<view class="price" s-else>￥{{goodsItem.g_price}}</view>
 			</view>
 			<view class="goods-counts">
-				<view class="change-count" bind:tap="minAcount" style="font-size: 22px;">-</view>
-				<text class="good-count">{{goodCountFromStro}}</text>
-				<view class="change-count" bind:tap="pluAcount">+</view>
+				<!-- <view class="change-count" bind:tap="minAcount" style="font-size: 22px;">-</view> -->
+				<text class="good-count">X{{goodCountFromStro}}</text>
+				<!-- <view class="change-count" bind:tap="pluAcount">+</view> -->
 			</view>
 		</view>
 		<!-- 配送方式 -->
 		<view class="deliver">运费<text s-if="Number(goodsItem.g_freightFee)">快递{{goodsItem.g_freightFee}}元</text> <text s-else>快递包邮</text> </view>
 		<view class="buyer-word-wrapper">
-			<view>
-				<text>买家留言</text>
-				<input style=" width: 70%;padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" s-model="leaveWord" />
-			</view>
+			<text>买家留言</text>
+			<input style="display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" s-model="leaveWord" />
 		</view>
 		<!-- 总价 -->
-		<view class="totalPrice">小计：
-			<text s-if="goodsItem.isSecKill">￥{{goodsItem.g_activityPrice*goodCountFromStro}}</text>
-			<text s-else>￥{{goodsItem.g_price*goodCountFromStro}}</text>
+		<view class="totalPrice">
+			<text style="float:left">小计：</text>
+			<text style="float:right" s-if="goodsItem.isSecKill">￥{{goodsItem.g_activityPrice*goodCountFromStro}}</text>
+			<text style="float:right" s-else>￥{{goodsItem.g_price*goodCountFromStro}}</text>
 		</view>
-		<view class="chooseWxPay">
-			<view class="wx-logo">
-				<image src="../../images/wx.png" alt="">
-					<text style="vertical-align: middle;margin-left:3px;">微信支付</text>
-			</view>
-			<view class="wx-checked">
-				<image src="../../images/xuanzhong.png" alt="">
-			</view>
+		<view class="totalPrice">
+			<text style="float:left">实付：</text>
+			<text style="float:right" s-if="goodsItem.isSecKill">￥{{goodsItem.g_activityPrice*goodCountFromStro}}</text>
+			<text style="float:right" s-else>￥{{goodsItem.g_price*goodCountFromStro}}</text>
 		</view>
 	</view>
-	<view class="bottom">
-		<view class="">
-			<text class="money">
-				<text>实付：</text>
-			<text s-if="goodsItem.isSecKill">￥{{goodsItem.g_activityPrice*goodCountFromStro}}</text>
-			<text s-else>￥{{goodsItem.g_price*goodCountFromStro}}</text>
-			<text>(含运费)</text>
-			</text>
-			<view class="payOrder" bind:tap="submitOrder">
-				<view>提交订单</view>
-			</view>
-		</view>
-	</view>
+	<view bind:tap="submitOrder" class="pay-by-ali">支付宝支付</view>

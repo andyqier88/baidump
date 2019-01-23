@@ -15,8 +15,9 @@
             display: inline-block;
             width: 65px;
         }
-        input {
+      .address-common  input {
             margin-left: 20px;
+            display: inline-block;
         }
     .save {
         text-align: center;
@@ -24,12 +25,15 @@
         margin-bottom: 40px;
         
     }
-    span {
-            padding: 10px 20px;
-            background: #dda559;
-            color: #fff;
-            border-radius: 5px;
-        }
+    .save .btn {
+        padding: 15px 20px;
+        background: #dda559;
+        color: #fff;
+        border-radius: 5px;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 16px;
+    }
     select{
         vertical-align: top;
         width: 65px;

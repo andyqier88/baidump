@@ -136,12 +136,12 @@ p {
   vertical-align: middle;
 }
 .check,.check-all {
-  background: url("../images/shoucang_fuxuankuang02@2x.png");
+  background: url("../../images/shoucang_fuxuankuang02@2x.png");
   background-size: cover;
   border: 1px solid #fff;
 }
 .check-all {
-  background: url("../images/shoucang_fuxuankuang02@2x.png");
+  background: url("../../images/shoucang_fuxuankuang02@2x.png");
   background-size: cover;
   border: 1px solid #fff;
 }

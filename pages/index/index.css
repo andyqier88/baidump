@@ -77,7 +77,29 @@ image{
     display: flex;
     align-items: center;
 }
-
+/* // 分类 */
+.cate-list{
+    padding: 10px 0px;
+    text-align: center;
+    border-bottom: 10px solid #f6f6f6;
+    font-size: 14px;
+    color: #232428;
+    background: #fff;
+}
+.cate-item{
+        margin: 0 5px;
+        color: #666;
+        display: inline-block;
+        width: pxToRem(90px) !important;
+        padding: 5px;
+        text-align: center;
+        margin-right: 0px !important;
+        
+    }
+   .cate-item image{
+            width: pxToRem(80px);
+            height: pxToRem(80px);
+        }
 .sub-item:last-child:after {
     height: 0;
 }
@@ -187,11 +209,11 @@ image{
     .hot-title{
     text-align: center;
     background: #fff;
-    font-size: 18px;
-    
+    font-size: 16px;
+    padding-top: 10px;
     
 }
-.hot-title h2{
+.hot-title text{
         font-weight: 600;
         padding-top: 15px;
     }

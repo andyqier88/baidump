@@ -59,12 +59,40 @@ Page({
                 console.log('错误信息：' + err.errMsg);
             }
         })
-        this.getdiscoverList()
-        this.hotActive()
+        this.getdiscoverList();
+        this.hotActive();
+        this.getV2Category();
+    },
+    // 分类获取
+    getV2Category(){
+        swan.request({
+            url: "https://app.16988.cn/mall/goods/category/h5shop", // 仅为示例，并非真实的接口地址
+            method: 'GET',
+            dataType: 'json',
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success: (res) => {
+                console.log(res.data);
+                this.setData({
+                    V2Category: res.data.data
+                })
+            },
+            fail: (err) => {
+                console.log('错误码：' + err.errCode);
+                console.log('错误信息：' + err.errMsg);
+            }
+        })
+    },
+    // 分类跳转
+    gotoV2CateIndex(e){
+        swan.navigateTo({
+            url:`/pages/category/category?cgid=${e.currentTarget.dataset.cgid}`
+        })
     },
     // 热门活动
     hotActive() {
-            swan.request({
+        swan.request({
             url: "https://app.16988.cn/common/ad/lists?mark=22", // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
@@ -89,6 +117,7 @@ Page({
         var linkData = e.currentTarget.dataset.bannerurl
         swan.navigateTo({
             url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+            
         })
     },
     // 推荐
@@ -118,5 +147,5 @@ Page({
         swan.navigateTo({
             url: `/pages/detail/detail?link=${e.currentTarget.dataset.goodid}`
         })
-    }
+    },
 });
