@@ -22,7 +22,8 @@
 			<text>剩余：{{detailData.g_stock}}件</text>
 		</view>
 		<view class='detail-intro-item detail-price-wrapper'>
-			<text class='detail-price' s-if="{{detailData.isSecKill =='1'}}">秒杀价 ¥{{detailData.g_secKillPrice}} </text>
+			<text class='detail-price' s-if="{{detailData.isSecKill =='1'}}">秒杀价 ¥{{detailData.g_activityPrice}} </text>
+			<s style="color:#c7c7c7" s-if="{{detailData.isSecKill =='1'}}"> 原价¥{{detailData.g_price}}</s>
 			<text class='detail-price' s-else>¥{{detailData.g_price}}</text>
 
 		</view>
@@ -67,8 +68,11 @@
 		</view>
 	</view>
 	<!--intro bottom  -->
-	<view class="bottom-buy" bind:tap="showMask">
-		<text>立即购买</text>
+	<view class="bottom-buy">
+		<view class="item kefu" bind:tap="gotoWebview">
+			<view><image src="../../images/kefu.png"></image><text style="margin-top: -13px; display: inherit;">客服</text></view>
+		</view>
+		<view bind:tap="showMask" class="item buy-now">立即购买</view>
 	</view>
 	<!-- 弹窗 -->
 	<view class="bottomCartMask" s-if="maskCart">

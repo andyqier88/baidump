@@ -129,6 +129,7 @@ image{
             margin-left: 5px;
         }
 .shop_item {
+  padding: 0 10px;
   background: #fff;
   display: flex;
   flex-wrap: wrap;
@@ -182,20 +183,15 @@ image{
     padding-left: 0.2rem;
   }
 .sale_msg {
-    height: 0.3rem;
     font-size: 0.15rem;
     color: #c7c7c7;
-    line-height: 0.3rem;
-    padding: 0.1rem 0;
+    padding: 0.05rem 0;
   }
   .product_name {
     color: #1a1a1a;
-    font-size: 0.15rem;
-    height: 0.36rem;
     padding-top: 0.1rem;
     display: flex;
     align-items: center;
-    
   }
   .prod_zys:after {
       font-size: 0.15rem;

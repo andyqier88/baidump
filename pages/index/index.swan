@@ -27,9 +27,7 @@
         </view>
         <view s-if="adHotList.length" class="hot-active">
             <view s-for="em in adHotList" class="hot-item">
-		
-                <!-- <img src="../images/1.png" alt=""> :src="em.a_image" -->
-                <image src="{{em.a_image}}" bind:tap="goToAdvert(em.link)" mode='widthFix'></image>
+                <image src="{{em.a_image}}" bind:tap="gotoWebview" data-bannerurl="{{em.link}}" mode='widthFix'></image>
                 <view>{{em.title}}</view>
             	
 			</view>
@@ -45,9 +43,8 @@
         </view>
 	<!-- 为你推荐 -->
 	<view style="padding-bottom:50px;">
-		<view class="recommend-title" bind:tap="gotoJian">
-			<text>为你推荐</text>
-			<image src="../../images/recom-all-icon.png" style='width:15px;height:15px;'></image>
+		<view class="recommend-title" >
+			<text>为你优选</text>
 		</view>
 
 		<!--商品模块-->

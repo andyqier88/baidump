@@ -132,7 +132,12 @@ Page({
           })
         }
     },
-
+    gotoWebview: function () {
+        var linkData = 'https://p.qiao.baidu.com/cps/chat?siteId=12769985&userId=26746183'
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}` 
+        })
+    },
     /**
      * 生命周期函数--监听页面显示
      */

@@ -5,10 +5,9 @@
         </view>
     </view>
 	<view s-if="!allOrderLists.length"  style="text-align: center;margin: 10px;">暂无订单</view>
-	<view s-else s-for="item in allOrderLists" style="background:#fff;font-size: 14px;">
+	<view s-else s-for="item,index in allOrderLists" style="background:#fff;font-size: 14px;">
 		<view class="order-number">
 			<text class="order-sign">订单号: <text ref="orderSn">{{item.o_sn}}</text> </text>
-			<!-- <input type="hidden" ref="orderId" :value="item.o_id" /> -->
 			<text class="order-state">{{item.o_flag}}</text>
 		</view>
 		<view class="seller-mess">
@@ -19,18 +18,16 @@
 				<view class="avatar-right">
 					<view s-if="item.o_nickname">{{item.o_nickname}}</view>
 					<view s-else>{{item.o_realname}}</view>
-					<!-- <image src="../images/renzheng.png"> -->
 				</view>
 			</view>
 		</view>
 		<view s-for="cartItem in item.cart">
-			<view bind:tap="goOrderDetail" data-osn="{{item.o_sn}}" class="list-wrapper">
+			<view bind:tap="goOrderDetail" data-osn="{{item.o_sn}}" data-oid="{{item.o_id}}" class="list-wrapper">
 				<view class="goods-img-wrapper">
 					<view class="goods-img">
 						<image s-if="cartItem.g_surfaceImg" src="{{cartItem.g_surfaceImg.gi_img}}">
 						<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png">
 					</view>
-					<!--图片 -->
 				</view>
 				<view class="right">
 					<view>{{cartItem.g_name}}</view>
@@ -41,25 +38,24 @@
 				</view>
 				<text class="goods-counts">x{{cartItem.c_num}}</text>
 			</view>
-
 			<!-- 价格 -->
 			<view class="total-price">共<text>{{cartItem.c_num}}</text>件商品 实付（含运费）<text>{{item.o_pay}}</text></view>
 			<!-- 交易取消 -->
 			<view s-if="item.o_status == '11'" class="user-confim">
-				<text bind:tap="delOrder(index)">删除订单</text>
-				<text class="getDeli" bind:tap="goOrderDetail(item.o_sn,item.g_id)">重新购买</text>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">删除订单</view>
+				<view class="getDeli" bind:tap="goOrderDetail" data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}">重新购买</view>
 			</view>
 			<!-- 待付款 -->
 			<view s-else-if="item.o_status == '0'" class="user-confim">
-				<view bind:tap="cancelOrder(index)">取消订单</view>
+				<view bind:tap="cancelOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">取消订单</view>
 				<!-- <view>联系卖家</view> -->
-				<text class="getDeli" bind:tap="goOrderDetail(item.o_sn,item.g_id)">立即付款</text>
+				<view class="getDeli" data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}" bind:tap="goOrderDetail">立即付款</view>
 			</view>
 			<!-- 已发货/待收货 -->
 			<view s-else-if="item.o_status == '2'" class="user-confim">
-				<view bind:tap="cancelOrder(index)">取消订单</view>
+				<view bind:tap="cancelOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">取消订单</view>
 				<!-- <view>联系卖家</view> -->
-				<text class="getDeli" bind:tap="getGoods(item.o_sn)">确认收货</text>
+				<view class="getDeli" bind:tap="getGoods" data-osn="{{item.o_sn}}" data-oid="{{cartItem.o_id}}">确认收货</view>
 			</view>
 			<!-- 已付款/待发货 -->
 			<view s-else-if="item.o_status == '1'" class="user-confim">
@@ -67,13 +63,13 @@
 			</view>
 			<!-- 已收货/交易完成 -->
 			<view s-else-if="item.o_status == '3'" class="user-confim">
-				<view bind:tap="delOrder">删除订单</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">删除订单</view>
 				<!-- <view>联系卖家</view> -->
 			</view>
 			<!-- 退款申请中 -->
 			<view s-else-if="item.o_status == '21'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="delOrder">删除订单</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">删除订单</view>
 			</view>
 			<!-- 退款中 -->
 			<view s-else-if="item.o_status == '22'" class="user-confim">
@@ -82,19 +78,18 @@
 			<!-- 申请退货等待卖家同意 -->
 			<view s-else-if="item.o_status == '15'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="delOrder">取消订单</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">取消订单</view>
 			</view>
 			<!-- 退款完成 -->
 			<view s-else-if="item.o_status == '23'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="cancelOrder(index)">取消订单</view>
+				<view bind:tap="cancelOrder" data-inx="{{index}}">取消订单</view>
 			</view>
 			<!-- 退款中 -->
 			<view s-else-if="item.o_status == '14'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
 			</view>
-		</view>
-		
+		</view>	
 	</view>
 	<view style="text-align: center;margin: 10px;">
 		<!-- <view s-if="isLoading">正在加载</view>

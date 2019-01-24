@@ -69,7 +69,7 @@ Page({
     goToMyOrder() {
         if (swan.getStorageSync('ZWCOOKIES')) {
             swan.navigateTo({
-                url: `/pages/mycoupon/mycoupon`
+                url: `/pages/myorder/myorder`
             })
         } else {
             swan.showToast({

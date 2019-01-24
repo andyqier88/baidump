@@ -42,6 +42,16 @@ Page({
         })
         this.getdiscoverList()
     },
+    onReachBottom(e){
+        var that = this;
+        
+        this.setData({
+            currentPage:that.data.currentPage++
+        })
+        that.data.currentPage++
+        this.getdiscoverList(that.data.currentPage,10)
+        
+    },
     init(){
         console.log("init")
     },
@@ -50,13 +60,12 @@ Page({
         var that = this;
         let secJson = {
             page: currentPage || 1,
-            pageSize: size || 2,
+            pageSize: size || 10,
             categoryGroupIds: this.data.cgid,
         };
         if(this.data.priceOrder){
             secJson.sortPrice = 1
         }else{
-            console.log('this.sortPrices',this.sortPrices)
             secJson.sortPrice = 2
         }
       if (this.data.sortPrices ==2) {

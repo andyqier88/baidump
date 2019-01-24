@@ -5,13 +5,13 @@
     <view class="container">
       <view  class="inx-nav-box">
         <view class="nav_list">
-          <view class="don-v" class="{{priceOrder ? 'active' : ''}}" bind:tap="selSch" data-sortnum = "0">价格</view>
-          <view class="don-v" class="{{navTxt !== '筛选' ? 'active' : ''}}" bind:tap="showSch">{{navTxt}}</view>
+          <view  class="don-v {{priceOrder ? 'active' : ''}}" bind:tap="selSch" data-sortnum = "0">价格</view>
+          <view  class="don-v {{navTxt !== '筛选' ? 'active' : ''}}" bind:tap="showSch">{{navTxt}}</view>
         </view>
         <view class="inx-nav-alt" s-if="isSec">
-          <view class="selem" class="{{sortPrices === 2 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "2"><span>0-500元</span></view>
-          <view class="selem" class="{{sortPrices === 3 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "3"><span>500-2000元</span></view>
-          <view class="selem" class="{{sortPrices === 4 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "4"><span>2000-5000元</span></view>
+          <view class="selem {{sortPrices === 2 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "2"><span>0-500元</span></view>
+          <view class="selem {{sortPrices === 3 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "3"><span>500-2000元</span></view>
+          <view class="selem {{sortPrices === 4 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "4"><span>2000-5000元</span></view>
           <view class="inx-nav-pay">
             <input class="input" type="text"  v-model="lowPrice" placeholder="最低价" />
             <view class="sav-line"></view>
@@ -32,8 +32,8 @@
       </view>
       <!--商品模块-->
       <view class="shop_item">
-        <view class="list" s-for="em in discoverList" bind:tap="goDatil(em.g_id)">
-          <view class="image_box" bind:tap="gotoDetail(em.g_id)" style="background:url({{em.g_surfaceImg.gi_img}});background-size:cover;">
+        <view class="list" s-for="em in discoverList" bind:tap="goDatil" data-goodid="{{em.g_id}}">
+          <view class="image_box" bind:tap="gotoDetail" data-goodid="{{em.g_id}}" style="background:url({{em.g_surfaceImg.gi_img}});background-size:cover;">
           </view>
           <view class="goods">
             <view class="product_name">

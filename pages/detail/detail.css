@@ -254,7 +254,7 @@ button::after {
   }
 .bottom-buy{
   text-align: center;
-  background-color: #cea068;
+  /* background-color: #cea068; */
   color: #fff;
   position: fixed;
   left: 0;
@@ -262,6 +262,27 @@ button::after {
   bottom: 0;
   height: 50px;
   line-height: 50px;
+  display: flex;
+}
+.bottom-buy .kefu{
+  flex:1;
+  background: #fff;
+  color: #000;
+}
+.bottom-buy .kefu image{
+  width:15px;
+  height:15px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.bottom-buy .kefu text{
+  margin-top: -13px;
+  display: inherit;
+}
+.bottom-buy .buy-now{
+  flex:3;
+  background-color: #cea068;
 }
 .bottomCartMask {
     position: fixed;

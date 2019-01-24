@@ -117,12 +117,14 @@
   margin: 15px;
   text-align: right;
   padding-bottom: 20px;
+      display: flex;
 }
-.user-confim span {
+.user-confim view {
   border: 1px solid #eee;
   padding: 5px 10px;
   border-radius: 5px;
   color: #999999;
+  margin: 0 5px;
 }
 .user-confim .getDeli {
   color: #fff;

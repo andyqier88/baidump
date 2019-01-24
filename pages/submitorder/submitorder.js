@@ -13,7 +13,7 @@ Page({
         itemArr: [],
         couponActive: true, //优惠券选中
         addressMessage: [],//地址信息
-        leaveWord: [],//留言
+        leaveWord: '',//留言
         wxCode: [],
         openId: [],
         cid: [],
@@ -27,6 +27,8 @@ Page({
         ziTiState: false,//自提状态
         aid: '',//地址id
         goodCountFromStro: 1,
+        goodsid:'',
+        goodsname:''
     },
 
     // 详情数据加载
@@ -74,7 +76,6 @@ Page({
                 'content-type': 'application/json', // 默认值
             },
             success: function (res) {
-                console.log(res.data.data);
                 if (res.data.error_code == 0) {
                     // swan.setStorageSync('priceToVoucher', res.data.data.item[0].g_price);
                     that.setData({
@@ -117,6 +118,13 @@ Page({
             uid: swan.getStorageSync('loginData').u_id,
             goodCountFromStro:swan.getStorageSync('goodCountFromStro')
         })
+    },
+    // 用户留言
+    bindLeaveInput:function (e) {
+        console.log(e)
+        this.setData({
+            leaveWord: e.detail.value
+        });
     },
     // 跳转首页
     gotoIndex: function () {
@@ -167,9 +175,56 @@ Page({
         // console.log(this.data.goodCount--)
         swan.setStorageSync('goodCountFromStro',swan.getStorageSync('goodCountFromStro'));
     },
-    // 购物车减法
     buyNow() {
         console.log('moe')
+    },
+    // 提交订单
+    submitOrder(){
+        var that = this;
+        swan.request({
+            url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
+            method: 'POST',
+            data: {
+                uid: '',
+                gid: that.data.goodsid,
+                aid:that.data.aid,
+                count:swan.getStorageSync('goodCountFromStro'),
+                guestContent:this.data.leaveWord || ''
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                "cookie": swan.getStorageSync('ZWCOOKIES')
+            },
+            success: function (res) {
+                if (res.data.error_code == 0) {
+                    swan.request({
+                        url: 'https://dev-app.16988.cn/mall/order/pay/get', //仅为示例，并非真实的接口地址
+                        method: 'POST',
+                        data: {
+                            tradeId: res.data.data.order_id,
+                            subject: that.data.goodsItem.g_name,
+                            totalAmount:that.data.goodsItem.g_price*100,
+                            timeout:'30',
+                            from:'1'
+                        },
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded', // 默认值
+                            "cookie": swan.getStorageSync('ZWCOOKIES')
+                        },
+                        success: function (res1) {
+                            if (res1.data.error_code == 0) {
+                                var linkData = `http://dev-app.16988.cn/mall/order/pay/init?payChannel=3&tradeId=${res.data.data.order_id}`
+                                swan.navigateTo({
+                                    url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+                                });
+                                swan.hideLoading()
+                            }
+                        }
+                    });
+                    swan.hideLoading()
+                }
+            }
+        });
     },
     /**
      * 生命周期函数--监听页面显示

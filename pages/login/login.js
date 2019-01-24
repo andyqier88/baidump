@@ -30,7 +30,7 @@ Page({
     },
     myInfo() {
         swan.request({
-            url: 'https://app.16988.cn/user/common/myInfo', // 仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/user/common/myInfo', // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -119,7 +119,7 @@ Page({
         var str = string.substr(0, string.length - 1);
         var md5ed = md5(str)
         swan.request({
-            url: 'https://app.16988.cn/user/common/getcaptcha', // 仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/user/common/getcaptcha', // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -184,7 +184,7 @@ Page({
             return false;
         }
         swan.request({
-            url: 'https://app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -254,7 +254,7 @@ Page({
         }
         // alert(that.yzmTexts)
         swan.request({
-            url: 'https://app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {

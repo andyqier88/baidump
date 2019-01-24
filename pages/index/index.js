@@ -148,4 +148,5 @@ Page({
             url: `/pages/detail/detail?link=${e.currentTarget.dataset.goodid}`
         })
     },
+    
 });

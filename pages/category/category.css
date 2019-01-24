@@ -34,8 +34,6 @@
   .product_name {
     color: #1a1a1a;
     font-size: 0.15rem;
-    height: 0.36rem;
-    padding-top: 0.1rem;
     display: flex;
     align-items: center;
     text-overflow: ellipsis;
@@ -215,12 +213,12 @@
     font-weight: 300;
     color: #cea068;
   }
-  .don-v:after {
+  .nav_list .don-v:after {
     content: "";
     height: 0;
     width: 0;
     display: inline-block;
-    border: 0.1rem transparent solid;
+    border: 0.05rem transparent solid;
     border-bottom-width: 0;
     border-top-color: #bbb;
     margin-left: 5px;

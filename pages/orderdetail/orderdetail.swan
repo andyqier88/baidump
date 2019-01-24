@@ -1,0 +1,145 @@
+<view class="detail-wrapper" s-if="detailData">
+	<view class="success-header">
+		<view class="sucess-car">
+			<image style="width: 80px;" src="../../images/order_icon.png" alt=""></image>
+		</view>
+		<view class="orderState-right">
+			<view>{{detailData.o_flag}}</view>
+			<view>{{detailData.o_tip}}</view>
+		</view>
+	</view>
+	<view class="buyer-name">
+		<text>收货人</text>
+	</view>
+	<view class="defaultAddress_">
+		<view class="address-top">
+			<image style="width: 15px;height: 20px;margin-right: 5px;" src="../../images/shouhuoren.png"></image>
+			<view class="address-icon address-flex">
+				<text>{{detailData.o_consignee}}</text>
+			</view>
+			<view class="address-flex" style="text-align: right;">
+				<text style="color: rgba(153,153,153,1)">{{detailData.o_phone}}</text>
+			</view>
+		</view>
+		<view class="order-address">{{detailData.o_provinceName}}{{detailData.o_areaName}} {{detailData.o_address}}</view>
+	</view>
+	<!-- 购买商品列表 -->
+	<view class="buy-goods">
+		<view class="avatar-head_">
+			<view class="avatar">
+				<image s-if="detailData.saler_avatar" src="{{detailData.saler_avatar}}"></image>
+				<!-- <image s-lazy="goodsItem.g_avatar"> -->
+				<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png"></image>
+			</view>
+			<view class="avatar-right">
+				<text s-if="detailData.saler_realname">{{detailData.saler_realname}}</text>
+				<text s-else>{{detailData.saler_nickname}}</text>
+				<image src="../../images/renzheng.png"></image>
+			</view>
+		</view>
+		<!-- list -->
+		<view s-if="detailData.cart">
+			<view s-for="item in detailData.cart"  class="list-wrapper_">
+				<view class="goods-img-wrapper">
+					
+                        <image class="goods-img" s-if="item.g_surfaceImg" src="{{item.g_surfaceImg.gi_img}}"></image>
+                        <image class="goods-img" s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png"></image>
+                    
+					<!--图片 -->
+				</view>
+				<view class="right">
+					<view>{{item.g_name}}</view>
+					<view class="intro-p">
+						<text class="">{{item.categoryName}}</text>
+						<text class="size" s-if="item.itemAttr[0]">{{item.itemAttr[0].ga_value}}</text>
+					</view>
+					<text class="price">{{item.c_price}}</text>
+				</view>
+				<text class="goods-counts">x{{item.c_num}}</text>
+			</view>
+		</view>
+
+		<!--买家留言  -->
+		<view class="buyer-word-wrapper">
+			<view>
+				<text>买家留言</text>
+				<input style="display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindLeaveinput="leaveWord" />
+			</view>
+		</view>
+		<view class="order-mess">
+			<view>订单编号:<text>{{detailData.o_sn}}</text>
+			</view>
+			<view class="orderCreatTime">下单时间:<text>{{detailData.o_createDate}}</text>
+			</view>
+		</view>
+		<view class="order-price-detail">
+			<view>
+				<view>
+					<text>订单总价</text>
+					<text>￥{{detailData.o_total}}</text>
+				</view>
+				<view>
+					<text>运费</text>
+					<text>￥{{detailData.o_freight}}</text>
+				</view>
+				<view>
+					<text>优惠券</text>
+					<text>-￥{{detailData.o_reduce}}</text>
+				</view>
+				<view>
+					<text>实付款</text>
+					<text style="color:#dda559">￥{{detailData.o_pay}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="order-tip">
+			<view>交易提醒</view>
+			<view class="otip">1、卖家发货前，请充分了解作品情况，并约定交易细节</view>
+			<view class="otip">2、请通过掌玩私信工具沟通约定，并保存好相关的聊天记录</view>
+		</view>
+	</view>
+	<view s-if="detailData.o_status== '0'" class="bottom">
+		<view class="payPrice">
+			实付：
+			<text class="money">
+                    <text>￥{{detailData.o_pay}}</text>
+			</text>
+		</view>
+		<view class="payOrder">
+			<view bind:tap="submitOrder" data-osn="{{detailData.o_sn}}" data-gid="{{detailData.g_id}}">去支付</view>
+		</view>
+	</view>
+	<view s-else-if="detailData.o_status== '11'" class="bottom">
+		<view class="payPrice">
+			实付：
+			<text class="money">
+                    <text>￥{{detailData.o_pay}}</text>
+			</text>
+		</view>
+		<view class="payOrder">
+			<view bind:tap="submitOrder" data-osn="{{detailData.o_sn}}" data-gid="{{detailData.g_id}}">去支付</view>
+		</view>
+	</view>
+	<view s-else-if="detailData.o_status== '2'" class="bottom">
+		<view class="payPrice">
+			实付：
+			<text class="money">
+                    <text>￥{{detailData.o_pay}}</text>
+			</text>
+		</view>
+		<view class="payOrder">
+			<view bind:tap="getGoods">确认收货</view>
+		</view>
+	</view>
+	<view s-else class="bottom">
+		<view class="payPrice">
+			实付：
+			<text class="money">
+                    <text>￥{{detailData.o_pay}}</text>
+			</text>
+		</view>
+		<view class="payOrder">
+			<text href="http://a.app.qq.com/o/simple.jsp?pkgname=art.jupai.com.jupai">联系客服</text>
+		</view>
+	</view>
+</view>
