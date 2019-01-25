@@ -26,9 +26,6 @@
         vertical-align: middle;
         
     }
-    span {
-            vertical-align: middle;
-        }
         .avatar-right image {
             width: 12px;
             height: 12px;
@@ -58,9 +55,6 @@
             margin-left: 8px;
             
         }
-        h3 {
-                font-size: 14px;
-            }
             .intro-p {
                 color: #bfbfbf;
                 margin: 5px 0;
@@ -91,7 +85,7 @@
                 color: rgb(153, 153, 153);
                 line-height: 30px;
             }
-            input {
+            /* input {
                 width: 33px;
                 text-align: center;
                 background: #eee;
@@ -99,7 +93,7 @@
                 vertical-align: middle;
                 border-radius: 0;
                 padding-left: 0;
-            }
+            } */
     .orderState-right {
         display: inline-block;
         margin-right: 10px;
@@ -142,9 +136,6 @@
         background: #fff;
         
     }
-    span {
-            vertical-align: middle;
-        }
         input {
             vertical-align: middle;
         }
@@ -166,9 +157,6 @@
         background: #ffffff;
         
     }
-    span {
-            color: #dda559;
-        }
     .bottom {
         position: fixed;
         left: 0;
@@ -183,9 +171,6 @@
             font-size: 14px;
             
         }
-        span {
-                font-size: 16px;
-            }
         .payPrice {
             display: inline-block;
             padding-left: 20px;
@@ -211,28 +196,14 @@
         padding-top: 15px;
         
     }
-    .wx-logo img {
-                width: 25px;
-                display: inline-block;
-                vertical-align: middle;
-            }
-        .wx-checked {
-            width: 22px;
-            float: right;
-        }
-        span {
-            display: inline-block;
-        }
+
     .order-tip {
         padding: 10px 20px;
         background: #fff;
         
     }
-    p {
-            margin-bottom: 5px;
-        }
-        .otip {
-          
+
+        .otip {    
           margin: 5px 0;
           color: rgba(187, 187, 187, 1);
           font-size: 12px;

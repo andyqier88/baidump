@@ -14,12 +14,7 @@ Page({
         pwdIsShow: true,
         yzmIsSend: false,
         yzmTimer: 60,
-        isFail: false,   //是否已经是掌玩资深用户
-        failShow: false, //失败弹框是否出现
-        isSuc: false,    //是否领取代金券成功
-        sucShow: false,  //成功弹框是否出现
         yzmClick: false, //是否获取过验证码
-        isOld: false,    //是否是老用户
         loginWay1: true,   // 密码登录&验证码登录切换
         loginWay2: false,   // 密码登录&验证码登录切换
         passWord: '',
@@ -27,34 +22,6 @@ Page({
     },
     onLoad: function () {
         console.log(this.data)
-    },
-    myInfo() {
-        swan.request({
-            url: 'https://dev-app.16988.cn/user/common/myInfo', // 仅为示例，并非真实的接口地址
-            method: 'GET',
-            dataType: 'json',
-            header: {
-                'content-type': 'application/json' // 默认值
-            },
-            success: (res) => {
-                console.log(res.data);
-                if (res.data.error_code == 0) {
-                    this.setData({
-                        myInfos: res.data.data,
-                        isLogin: true
-                    })
-                } else {
-                    this.setData({
-                        isLogin: false
-                    })
-                }
-
-            },
-            fail: (err) => {
-                console.log('错误码：' + err.errCode);
-                console.log('错误信息：' + err.errMsg);
-            }
-        })
     },
     clickTab1() {
         this.setData({
@@ -69,40 +36,29 @@ Page({
         })
     },
     bindKeyInput: function (e) {
-        console.log(e)
         this.setData({
             phoneNum: e.detail.value
         });
     },
     bindPassInput: function (e) {
-        console.log(e)
         this.setData({
             passText: e.detail.value
         });
     },
     bindYzmInput: function (e) {
-        console.log(e)
         this.setData({
             yzmTexts: e.detail.value
         });
-    },
-    confirm() {
-        var that = this;
-        this.confirmState = false;
-        setTimeout(function () {
-            swan.navigateTo({
-                url: 'pages/detail/detail'
-            });
-        }, 1000)
     },
     sendYZM() {   //发送验证码
         var that = this;
         if (this.data.yzmIsSend) {
             return false;
         }
-        console.log(this.data)
         if (!/^1[34578][0-9]{9}$/.test(this.data.phoneNum.replace(/\s*/g, ''))) {
-            console.log('请输入正确的手机号');
+            swan.showToast({
+                title: '手机号必须'
+            });
             return false;
         }
         var timeStamp = (new Date()).valueOf();
@@ -132,7 +88,6 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success: (res) => {
-                console.log(res.data);
                 if (res.data.error_msg == "") {
                     if (res.data.data === true) {   //发送验证码成功
                         this.setData({
@@ -144,17 +99,27 @@ Page({
                         console.log('验证码发送成功');
                         // this.yzmIsSend = true;
                         const timer = setInterval(() => {
+                            
                             this.data.yzmTimer--;
+                            this.setData({
+                                yzmTimer:this.data.yzmTimer
+                            })
                             if (this.data.yzmTimer <= 0) {
                                 clearInterval(timer);
-                                this.data.yzmTimer = 60;
-                                this.data.yzmIsSend = false;
+                                this.setData({
+                                    yzmTimer:60,
+                                    yzmIsSend:false
+                                })
                             }
                         }, 1000);
                     } else if (data.data === false) {    //发送验证码失败
-                        console.log('验证码发送失败，请稍后重试');
+                        swan.showToast({
+                            title: '验证码发送失败，请稍后重试'
+                        });
                     } else {
-                        console.log('服务器错误，请稍候重试~');
+                        swan.showToast({
+                            title: '服务器错误，请稍候重试~'
+                        });
                     }
                 } else if (data.error_msg == "该手机号码已经注册，请返回登陆") {    ////手机号已经注册  -->老用户弹框
                     // this.loginWay = false;
@@ -176,11 +141,15 @@ Page({
     loginBypass() {
         var that = this;
         if (!/^1[34578][0-9]{9}$/.test(that.data.phoneNum.replace(/\s*/g, ''))) {
-            console.log('请输入正确的手机号');
+            swan.showToast({
+                title: '手机号必须'
+            });
             return false;
         }
         if (!that.data.passText) {
-            console.log('请输入密码');
+            swan.showToast({
+                title: '请输入密码'
+            });
             return false;
         }
         swan.request({
@@ -196,14 +165,16 @@ Page({
                 
             },
             success: (res) => {
-                console.log(res.data);
                 let data = res.data.data;
-                console.log(res.data)
                 if (res.data.error_code == '0') {
-                    console.log('登录成功');
-                    console.dir(res.header)
-                    console.log(res.header['set-cookie'])
-                    let COOKS = res.header['set-cookie'] || ''
+                    swan.showToast({
+                        title: '登录成功'
+                    });
+                    console.log('1-登录成功-1')
+                    console.log(res)
+                    console.log(res.header['set-cookie'])||res.header['Set-Cookie']
+                    console.log('2-登录成功-2')
+                    let COOKS = res.header['set-cookie'] || res.header['Set-Cookie']||''
                     let ARRYS = COOKS.match(/([\w\-.]*)=([^\s=]+);/g) || []
                     
                     ARRYS.forEach((str) => {
@@ -211,12 +182,10 @@ Page({
                             swan.setStorageSync('ZWCOOKIES', str);
                             swan.setStorageSync('loginData', res.data.data)
                             console.log(str);
-                            // swan.setStorage({
-                            //     key: 'ZWCOOKIES',
-                            //     data: str
-                            // });
+                            console.log('3-登录成功-3')
                         }
                     })
+                    
                     setTimeout(function () {
                         swan.reLaunch({
                             url: '/pages/index/index',
@@ -224,7 +193,9 @@ Page({
                     }, 1000)
                 }
                 else {
-                    console.log('登录失败');
+                    swan.showToast({
+                        title: '登录失败'
+                    });
                 }
             },
             fail: (err) => {
@@ -236,23 +207,30 @@ Page({
     loginByCode() {
         var that = this;
         if (!this.data.yzmClick) {
-            console.log('请先获取验证码');
+            swan.showToast({
+                title: '请先获取验证码'
+            });
             return false;
         }
         if (!/^1[34578][0-9]{9}$/.test(this.data.phoneNum.replace(/\s*/g, ''))) {
-            console.log('请输入正确的手机号');
+            swan.showToast({
+                title: '手机号必须'
+            });
             return false;
         }
         // alert('',this.yzmTexts)
         if (!this.data.yzmTexts) {
-            console.log('请输入验证码');
+            swan.showToast({
+                title: '请输入验证码'
+            });
             return false;
         }
         if (!/^\d{6}$/.test(this.data.yzmTexts)) {
-            console.log('请输入正确的验证码');
+            swan.showToast({
+                title: '请输入正确的验证码'
+            });
             return false;
         }
-        // alert(that.yzmTexts)
         swan.request({
             url: 'https://dev-app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
             method: 'GET',
@@ -265,21 +243,20 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success: (res) => {
-                console.log(res.data);
                 let data = res.data.data;
-                console.log(res.data)
                 if (res.data.error_code == '0') {
-                    console.log('登录成功');
-                    swan.getStorage({
-                        u_id: res.data.data.u_id,
-                        success: function (res) {
-                            console.log(res.data);
-                        },
-                        fail: function (err) {
-                            console.log('错误码：' + err.errCode);
-                            console.log('错误信息：' + err.errMsg);
-                        }
+                    swan.showToast({
+                        title: '登录成功'
                     });
+                    let COOKS = res.header['set-cookie'] || res.header['Set-Cookie']||''
+                    let ARRYS = COOKS.match(/([\w\-.]*)=([^\s=]+);/g) || []
+                    
+                    ARRYS.forEach((str) => {
+                        if (str.indexOf('JPSESSID=') !== -1) {
+                            swan.setStorageSync('ZWCOOKIES', str);
+                            swan.setStorageSync('loginData', res.data.data)
+                        }
+                    })
                     setTimeout(function () {
                         swan.reLaunch({
                             url: '/pages/index/index',
@@ -287,7 +264,9 @@ Page({
                     }, 1000)
                 }
                 else {
-                    console.log('登录失败');
+                    swan.showToast({
+                        title: '登录失败'
+                    });
                 }
             },
             fail: (err) => {

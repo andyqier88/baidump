@@ -63,7 +63,7 @@
 		<view class="buyer-word-wrapper">
 			<view>
 				<text>买家留言</text>
-				<input style="display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindLeaveinput="leaveWord" />
+				<input style="width:70%;background:#fff; display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindLeaveinput="leaveWord" />
 			</view>
 		</view>
 		<view class="order-mess">

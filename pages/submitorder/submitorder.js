@@ -38,7 +38,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
             data: {
                 id: that.data.goodsid
             },
@@ -66,7 +66,7 @@ Page({
     getAddress() {
        var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/user/address/lists', //仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/mall/user/address/lists', //仅为示例，并非真实的接口地址
             method: 'GET',
             data: {
                 uid: swan.getStorageSync('loginData').u_id,
@@ -187,9 +187,9 @@ Page({
             data: {
                 uid: '',
                 gid: that.data.goodsid,
-                aid:that.data.aid,
+                aid:that.data.addressMessage.a_id,
                 count:swan.getStorageSync('goodCountFromStro'),
-                guestContent:this.data.leaveWord || ''
+                guestContent:that.data.leaveWord || ''
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值

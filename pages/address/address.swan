@@ -7,30 +7,39 @@
 		<text>手机号</text>
 		<input type="text" placeholder="请输入手机号" value="{=phone=}" bindinput="bindPhoneInput"/>
 	</view>
-	<view class="address-common">
+	<!-- <view class="address-common">
 		<text>省市区</text>
 		<picker mode="region" value="{{index}}" bind:change="regionChange" style="display:inline-block" title="省市区选择器">
 			<view class="picker" style="display:inline-block" >
 				{{provinceName?provinceName:regionData[0]}} {{cityName?cityName:regionData[1]}} {{areaName?areaName:regionData[2]}}
 			</view>
 		</picker>
-	</view>
-	<!-- <view class="address-common">
-		<text>城市</text>
-		<picker mode="selector" bindchange="selectCityCode" custom-item="{{customItem}}" title="省市区选择器">
-			<view class="picker">
-				当前选择：{{regionData[0]}} {{regionData[1]}} {{regionData[2]}}
-			</view>
-		</picker>
-	</view>
-	<view class="address-common">
-		<text>区县</text>
-		<picker mode="selector" bindchange="regionChange" custom-item="{{customItem}}" title="省市区选择器">
-			<view class="picker">
-				当前选择：{{regionData[0]}} {{regionData[1]}} {{regionData[2]}}
-			</view>
-		</picker>
 	</view> -->
+	<view class="address-common">
+		<text>省份</text>
+			<picker style="display:inline-block" mode="selector" bind:change="provChange"  range="{{provinces}}"   title="省市区选择器">
+				<view class="picker">
+					{{provinceName?provinceName:provinces[proValue]}}
+				</view>
+			</picker>
+	</view>
+	<view class="address-common" >
+		<text  >城市</text>
+		<!-- bind:tap="chooseCity" -->
+		<picker style="display:inline-block" mode="selector"  bind:change="cityChange"   value="{{cityArrs[index]}}" range="{{cityArrs}}" title="省市区选择器">
+			<view class="picker">
+				{{cityName?cityName:cityArrs[cityValue]}}
+			</view>
+		</picker>
+	</view>
+	<view  class="address-common">
+		<text>区县</text>
+		<picker style="display:inline-block" mode="selector" bind:change="areaChange" title="省市区选择器" range="{{areaArr}}" value="{{areaArr[index]}}">
+			<view class="picker">
+				{{areaName?areaName:areaArr[areaValue]}}
+			</view>
+		</picker>
+	</view>
 	<!-- <view class="address-common">
 		<select bindchange="selectProCode" ref="ProCode">
                 <option value="请选择">请选择</option>

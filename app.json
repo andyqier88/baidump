@@ -1,7 +1,6 @@
 {
     "debug": true,
     "pages": [
-        "pages/api/api",
         "pages/index/index",
         "pages/mycenter/mycenter",
         "pages/banner/banner",

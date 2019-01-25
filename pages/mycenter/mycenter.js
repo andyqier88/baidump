@@ -81,13 +81,7 @@ Page({
     gotoLogin() {
         console.log("89")
         swan.navigateTo({
-            url: '/pages/login/login',
-            success:function(e){
-                console.log(e)
-            },
-            fail:function(e){
-                console.log(e)
-            }
+            url: '/pages/login/login'
         })
     },
 

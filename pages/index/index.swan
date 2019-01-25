@@ -57,7 +57,7 @@
 				<view class="goods">
 					<view class="product_name">
 						<span class="iconfont icon-ziying prod_zys"></span>
-						<view>{{item.g_name}}</view>
+						<view class="g-name">{{item.g_name}}</view>
 					</view>
 					<view s-if="item.g_slogan" class="sale_msg">{{item.g_slogan}}</view>
 					<view class="product_info">

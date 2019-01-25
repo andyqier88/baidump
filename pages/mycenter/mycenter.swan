@@ -9,17 +9,17 @@
         <view s-else class="top-head">
             <view s-if="myInfos.u_avatar" class="avatar" style="background: url({{myInfos.u_avatar}});background-size: cover;background-repeat: no-repeat;">
                 <view class="level">
-                    <image src="./../page/zwHomeH5/images/v.png" alt="">
+                    <image src="../../images/v.png" alt="">
                 </view>
             </view>
             <view s-else class="avatar defauet-avatar">
             </view>
             
             <view class="avatar-right">
-                <h2 s-if="myInfos.u_nickname">{{myInfos.u_nickname}}</h2>
-                <h2 s-else-if="myInfos.u_realname">{{myInfos.u_realname}}</h2>
-                <h2 s-else>无一成</h2>
-                <p>{{myInfos.u_integral}}积分</p>
+                <view s-if="myInfos.u_nickname">{{myInfos.u_nickname}}</view>
+                <view s-else-if="myInfos.u_realname">{{myInfos.u_realname}}</view>
+                <view s-else>无一成</view>
+                <view>{{myInfos.u_integral}}积分</view>
             </view>
         </view>
         <view class="my-list-item">

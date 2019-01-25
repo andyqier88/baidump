@@ -26,20 +26,20 @@
 	<view class="buy-goods">
 		<view class="avatar-head">
 			<view class="avatar">
-				<image src="{{goodsItem.g_avatar}}">
+				<image src="{{goodsItem.g_avatar}}"></image>
 			</view>
 			<view class="avatar-right">
 				<view s-if="goodsItem.g_realname">{{goodsItem.g_realname}}</view>
 				<view s-else>{{goodsItem.g_nickname}}</view>
-				<image src="../../images/renzheng.png">
+				<image src="../../images/renzheng.png"></image>
 			</view>
 		</view>
 		<!-- list -->
 		<view class="list-wrapper">
 			<view class="goods-img-wrapper">
 				<view class="goods-img">
-					<image s-if="goodsItem.g_surfaceImg" src="{{goodsItem.g_surfaceImg.gi_img}}">
-						<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png">
+					<image s-if="goodsItem.g_surfaceImg" src="{{goodsItem.g_surfaceImg.gi_img}}"></image>
+					<image s-else src="https://cdn.16988.cn/res/html/images/h5/zw.png"></image>
 				</view>
 				<!--图片 -->
 			</view>

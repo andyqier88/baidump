@@ -40,7 +40,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
+            url: 'https://dev-app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
             data: {
                 id: that.data.goodsid
             },

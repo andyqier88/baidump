@@ -9,6 +9,7 @@ Page({
         allOrderLists: [], //订单列表
         cartNum: [],
         page: 1,
+        currentPage:1,
         isLoading: true,
         listLength: 0,
         tabItems:[{name:"所有订单",status:"0,1,2,3,14,15,16,21,22,23,24,25,35,36,100"},
@@ -31,14 +32,15 @@ Page({
         this.setData({
             tabNum: e.currentTarget.dataset.inx,
             page:1,
-            allOrderLists:[]
+            allOrderLists:[],
+            currentPage:1
         })
         console.log(e.currentTarget.dataset.state)
         console.log(e)
-        this.getAllOrderLists(e.currentTarget.dataset.state)
+        this.getAllOrderLists(e.currentTarget.dataset.state,1)
     },
     // 订单列表
-    getAllOrderLists(statusData) {
+    getAllOrderLists(statusData,currentPage) {
         var that = this;
         swan.showLoading({
             title: '加载中',
@@ -52,7 +54,8 @@ Page({
                 listType: 1,
                 uid: swan.getStorageSync('loginData').u_id,
                 status:statusData||' ',
-                page: that.data.page++||1,
+                // page: that.data.page++||1,
+                page:currentPage || 1,
                 pageSize: 10
             },
             header: {
@@ -94,6 +97,18 @@ Page({
     loadMore(){
         var that = this;
         this.getAllOrderLists(that.data.tabItems[that.data.tabNum].status)
+    },
+    onReachBottom(e){
+        var that = this;
+        if(!this.data.listLength){
+            return false
+        }
+        this.setData({
+            currentPage:that.data.currentPage++
+        })
+        that.data.currentPage++
+        this.getAllOrderLists(that.data.tabItems[that.data.tabNum].status,that.data.currentPage)
+        
     },
     goOrderDetail: function (e) {
         console.log(e.currentTarget.dataset.osn)

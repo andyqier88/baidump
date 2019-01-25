@@ -117,13 +117,12 @@ Page({
         var linkData = e.currentTarget.dataset.bannerurl
         swan.navigateTo({
             url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
-            
         })
     },
     // 推荐
     getdiscoverList() {
         swan.request({
-            url: "https://app.16988.cn/mall/goods/item/getWxRecommendGoods", // 仅为示例，并非真实的接口地址
+            url: "https://dev-app.16988.cn/mall/goods/item/getWxRecommendGoods", // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -148,5 +147,4 @@ Page({
             url: `/pages/detail/detail?link=${e.currentTarget.dataset.goodid}`
         })
     },
-    
 });
