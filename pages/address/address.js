@@ -257,7 +257,10 @@ Page({
     provChange: function (e) {
         this.setData({
             proValue: e.detail.value,
-            cityArrs:['选择']
+            cityArrs:['选择'],
+            provinceName: '',
+            cityName: '',
+            areaName: '',
         });
         var proValueCode = this.data.provincesCodes[e.detail.value]
         swan.setStorageSync('proValueCode',proValueCode);
