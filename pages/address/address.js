@@ -4,6 +4,7 @@
  */
 /* globals Page, swan */
 
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         title: '所在地区',
@@ -39,7 +40,7 @@ Page({
     getAddress() {
         var that= this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/user/address/lists', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/user/address/lists`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -73,7 +74,7 @@ Page({
     getCode() {
         var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/user/address/getCode', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -104,7 +105,7 @@ Page({
     selectProCode(val) {
         var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/user/address/getCode', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -137,7 +138,7 @@ Page({
     selectCityCode(areaval) {
         var that = this;
         swan.request({
-            url: 'https://app.16988.cn/mall/user/address/getCode', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -187,7 +188,7 @@ Page({
     //         return false
     //     }
     //     swan.request({
-    //         url: 'https://dev-app.16988.cn/mall/user/address/addByName', // 仅为示例，并非真实的接口地址
+    //         url: `${domin.testdom}/mall/user/address/addByName` , // 仅为示例，并非真实的接口地址
     //         method: 'POST',
     //         dataType: 'json',
     //         header: {
@@ -230,7 +231,7 @@ Page({
             return false
         }
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/user/address/post', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/user/address/post`, // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             header: {
@@ -257,10 +258,7 @@ Page({
     provChange: function (e) {
         this.setData({
             proValue: e.detail.value,
-            cityArrs:['选择'],
-            provinceName: '',
-            cityName: '',
-            areaName: '',
+            cityArrs:['选择']
         });
         var proValueCode = this.data.provincesCodes[e.detail.value]
         swan.setStorageSync('proValueCode',proValueCode);

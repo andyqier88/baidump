@@ -1,15 +1,1 @@
-{
-    "libVersion": "2.10.34",
-    "appid": "15091038",
-    "setting": {
-        "urlCheck": false
-    },
-    "condition": {
-        "swan": {
-            "current": -2,
-            "list": []
-        }
-    },
-    "compileType": "smartprogram",
-    "name": "baidump"
-}
+{"libVersion":"2.10.34","appid":"15091038","setting":{"urlCheck":false},"condition":{"swan":{"current":-2,"list":[]}},"compileType":"smartprogram","name":"baidump","appInfo":{"app_name":"掌玩文化商城","app_key":"sv6GwUkv7pC9dzAXb2YubGS4H1g4UCeG","app_photo":"https://b.bdstatic.com/searchbox/mappconsole/image/20181207/1544178572513532.png","domains":{"request":["https://dev-app.16988.cn"],"socket":["wss://dev-app.16988.cn"],"uploadFile":["https://dev-app.16988.cn"],"downloadFile":["https://dev-app.16988.cn"]},"isExistsPackage":true,"webview_domains":["https://dev-app.16988.cn","https://app.16988.cn","https://www.16988.cn","https://dev-www.16988.cn"],"webAction":["swan/navigateTo","swan/navigateBack","swan/switchTab","swan/reLaunch","swan/redirectTo","swan/postMessage","swan/previewImage","swan/getLocation"],"isTp":false,"needWeb":false,"tpAppId":null},"appkey":"sv6GwUkv7pC9dzAXb2YubGS4H1g4UCeG"}

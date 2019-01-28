@@ -30,23 +30,23 @@
     },
     "tabBar": {
         "color": "#a2a2a2",
-        "selectedColor": "#3388ff",
+        "selectedColor": "#000",
         "borderStyle": "black",
         "backgroundColor": "#ffffff",
         "list": [{
             "pagePath": "pages/index/index",
-            "iconPath": "images/component_normal.png",
-            "selectedIconPath": "images/component_selected.png",
+            "iconPath": "images/home.png",
+            "selectedIconPath": "images/homec.png",
             "text": "首页"
         },{
             "pagePath": "pages/ingenuity/ingenuity",
-            "iconPath": "images/API_normal.png",
-            "selectedIconPath": "images/API_selected.png",
+            "iconPath": "images/jiang.png",
+            "selectedIconPath": "images/jiangc.png",
             "text": "匠心记"
         },{
             "pagePath": "pages/mycenter/mycenter",
-            "iconPath": "images/API_normal.png",
-            "selectedIconPath": "images/API_selected.png",
+            "iconPath": "images/my.png",
+            "selectedIconPath": "images/myc.png",
             "text": "我的"
         }]
     }

@@ -4,6 +4,7 @@
  */
 /* globals Page, swan */
 var md5 = require('../../uitls/md5.min.js')
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         phoneNum: '',   //手机号
@@ -22,8 +23,10 @@ Page({
     },
     onLoad: function () {
         console.log(this.data)
+        console.log(domin.dom)
+        console.log(domin.testdom)
     },
-    clickTab1() {
+    clickTab1() { 
         this.setData({
             loginWay1: true,
             loginWay2: false
@@ -33,6 +36,12 @@ Page({
         this.setData({
             loginWay1: false,
             loginWay2: true
+        })
+    },
+    userAgreement(){
+        var linkData = `${domin.testdom}/html/userAgreement.html`
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
         })
     },
     bindKeyInput: function (e) {
@@ -75,7 +84,7 @@ Page({
         var str = string.substr(0, string.length - 1);
         var md5ed = md5(str)
         swan.request({
-            url: 'https://dev-app.16988.cn/user/common/getcaptcha', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/user/common/getcaptcha` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -91,7 +100,6 @@ Page({
                 if (res.data.error_msg == "") {
                     if (res.data.data === true) {   //发送验证码成功
                         this.setData({
-                            // myInfos: res.data.data,
                             yzmClick: true,
                             yzmIsSend: true
                         })
@@ -153,7 +161,7 @@ Page({
             return false;
         }
         swan.request({
-            url: 'https://dev-app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
+            url:`${domin.testdom}/user/common/login`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -194,7 +202,7 @@ Page({
                 }
                 else {
                     swan.showToast({
-                        title: '登录失败'
+                        title: res.data.error_msg
                     });
                 }
             },
@@ -232,7 +240,7 @@ Page({
             return false;
         }
         swan.request({
-            url: 'https://dev-app.16988.cn/user/common/login', // 仅为示例，并非真实的接口地址
+            url:`${domin.testdom}/user/common/login` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -265,7 +273,7 @@ Page({
                 }
                 else {
                     swan.showToast({
-                        title: '登录失败'
+                        title: res.data.error_msg
                     });
                 }
             },

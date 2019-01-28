@@ -1,5 +1,5 @@
 //获取应用实例
-
+var domin = require('../../uitls/domain.js')
 Page({
 
     /**
@@ -40,7 +40,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/goods/item/detail` , //仅为示例，并非真实的接口地址
             data: {
                 id: that.data.goodsid
             },

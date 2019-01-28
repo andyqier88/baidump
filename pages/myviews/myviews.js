@@ -3,6 +3,7 @@
  * @author renzhonghua
  */
 /* globals Page, swan */
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         goodsHisLists: []
@@ -12,7 +13,7 @@ Page({
     },
     getViewsList() {
         swan.request({
-            url: 'https://app.16988.cn/user/visit/goodsHisLists', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/user/visit/goodsHisLists` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {

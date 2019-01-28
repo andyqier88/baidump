@@ -3,7 +3,7 @@
  * @author renzhonghua
  */
 /* globals Page, swan */
-
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         adList: [], // 广告列表
@@ -55,6 +55,17 @@ Page({
     init(){
         console.log("init")
     },
+    // 监听价格
+    watchHighPrice(e){
+        this.setData({
+            highPrice:e.detail.value
+        })
+    },
+    watchLowPrice(e){
+        this.setData({
+            lowPrice:e.detail.value
+        })
+    },
     // 商品列表
     getdiscoverList(currentPage,size) {
         var that = this;
@@ -91,7 +102,7 @@ Page({
         secJson.highPrice = this.data.highPrice;
       }
         swan.request({
-            url: "https://app.16988.cn/mall/goods/item/listsWxH5", // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/goods/item/listsWxH5` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -103,6 +114,15 @@ Page({
                 this.setData({
                     discoverList : [...this.data.discoverList, ...res.data.data]
                 })
+                if(this.data.discoverList.length==0){
+                    this.setData({
+                        is_empty:true
+                    })
+                }else{
+                    this.setData({
+                        is_empty:false
+                    })  
+                }
             },
             fail: (err) => {
                 console.log('错误码：' + err.errCode);
@@ -201,5 +221,30 @@ Page({
       })
       this.getdiscoverList()
     //   MyLocalStorage.Cache.remove('selForCate')
-    }
+    },
+    savSec(){
+        console.log('lowP',this.data.lowPrice)
+       if (!this.data.lowPrice) {
+        swan.showToast({
+            title:"请填写最低价"
+        });
+        return false;
+      }
+      if (!this.data.highPrice) {
+        swan.showToast({
+            title:"请填写最高价"
+        });
+        return false;
+      }
+      this.setData({
+        browseTimes : "",
+        sortTime:"",
+        sortPrice : "",
+        currentPage: 1,
+        navTxt : `${this.data.lowPrice} ～ ${this.data.highPrice}`,
+        isSec : !this.data.isSec,
+        discoverList : []
+      })
+      this.getdiscoverList(); 
+    },
 })

@@ -3,7 +3,7 @@
  * @author renzhonghua
  */
 /* globals Page, swan */
-
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         myInfos:[],
@@ -24,7 +24,7 @@ Page({
 
     myInfo() {
         swan.request({
-            url: 'https://app.16988.cn/user/common/myInfo', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/user/common/myInfo` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {

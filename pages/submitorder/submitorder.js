@@ -1,5 +1,7 @@
 //获取应用实例
 
+// var alipayjsapi = require('../../uitls/alipayjsapi.inc.min.js')
+var domin = require('../../uitls/domain.js')
 Page({
 
     /**
@@ -111,6 +113,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // console.log(alipayjsapi)
         var that = this;
         console.log(options, 'yuy')
         that.setData({
@@ -179,7 +182,55 @@ Page({
         console.log('moe')
     },
     // 提交订单
-    submitOrder(){
+    // submitOrder(){
+    //     var that = this;
+    //     swan.request({
+    //         url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
+    //         method: 'POST',
+    //         data: {
+    //             uid: '',
+    //             gid: that.data.goodsid,
+    //             aid:that.data.addressMessage.a_id,
+    //             count:swan.getStorageSync('goodCountFromStro'),
+    //             guestContent:that.data.leaveWord || ''
+    //         },
+    //         header: {
+    //             'content-type': 'application/x-www-form-urlencoded', // 默认值
+    //             "cookie": swan.getStorageSync('ZWCOOKIES')
+    //         },
+    //         success: function (res) {
+    //             if (res.data.error_code == 0) {
+    //                 swan.request({
+    //                     url: 'https://dev-app.16988.cn/mall/order/pay/get', //仅为示例，并非真实的接口地址
+    //                     method: 'POST',
+    //                     data: {
+    //                         tradeId: res.data.data.order_id,
+    //                         subject: that.data.goodsItem.g_name,
+    //                         totalAmount:that.data.goodsItem.g_price*100,
+    //                         timeout:'30',
+    //                         from:'1'
+    //                     },
+    //                     header: {
+    //                         'content-type': 'application/x-www-form-urlencoded', // 默认值
+    //                         "cookie": swan.getStorageSync('ZWCOOKIES')
+    //                     },
+    //                     success: function (res1) {
+    //                         if (res1.data.error_code == 0) {
+    //                             var linkData = `https://dev-app.16988.cn/mall/order/pay/init?payChannel=3&tradeId=${res.data.data.order_id}`
+    //                             swan.navigateTo({
+    //                                 url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+    //                             });
+    //                             swan.hideLoading()
+    //                         }
+    //                     }
+    //                 });
+    //                 swan.hideLoading()
+    //             }
+    //         }
+    //     });
+    // },
+    // 
+     submitOrder(){
         var that = this;
         swan.request({
             url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
@@ -213,11 +264,28 @@ Page({
                         },
                         success: function (res1) {
                             if (res1.data.error_code == 0) {
-                                var linkData = `http://dev-app.16988.cn/mall/order/pay/init?payChannel=3&tradeId=${res.data.data.order_id}`
-                                swan.navigateTo({
-                                    url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+                                swan.request({
+                                    url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
+                                    method: 'POST',
+                                    data: {
+                                        payChannel: 3,
+                                        tradeId: res.data.data.order_id
+                                        
+                                    },
+                                    header: {
+                                        'content-type': 'application/x-www-form-urlencoded', // 默认值
+                                        "cookie": swan.getStorageSync('ZWCOOKIES')
+                                    },
+                                    success: function (res2) {
+                                        if (res2.data.error_code == 0) {
+                                            var linkData = `https://openapi.alipay.com/gateway.do?${res2.data.data.payInfo3}`
+                                            swan.navigateTo({
+                                                url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+                                            });
+                                            swan.hideLoading()
+                                        }
+                                    }
                                 });
-                                swan.hideLoading()
                             }
                         }
                     });

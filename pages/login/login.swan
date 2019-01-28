@@ -29,7 +29,7 @@
 		</view>
 
 	</view>
-	<view class="userAgreement">
-		登录既代表同意 <a href="../userAgreement.html">掌玩用户协议</a>
+	<view class="userAgreement" bind:tap="userAgreement" >
+		登录既代表同意 <text style="color:blue"> 掌玩用户协议</text>
 	</view>
 </view>

@@ -3,7 +3,7 @@
  * @author renzhonghua
  */
 /* globals Page, swan */
-
+var domin = require('../../uitls/domain.js')
 Page({
     data: {
         allOrderLists: [], //订单列表
@@ -26,6 +26,7 @@ Page({
     // },
     onLoad: function () {
         this.getAllOrderLists("0,1,2,3,14,15,16,21,22,23,24,25,35,36,100")
+        swan.setStorageSync('tabState',"0,1,2,3,14,15,16,21,22,23,24,25,35,36,100")
     },
     // tab 切换
     tabClick(e) {
@@ -38,6 +39,17 @@ Page({
         console.log(e.currentTarget.dataset.state)
         console.log(e)
         this.getAllOrderLists(e.currentTarget.dataset.state,1)
+        swan.setStorageSync('tabState',e.currentTarget.dataset.state)
+    },
+     submitOrder(e) {
+        console.log(e)
+        var that = this;
+        var linkData = `${domin.testdom}/mall/order/pay/init?payChannel=3&tradeId=${e.currentTarget.dataset.osn}`
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+        });
+        // return false;
+       
     },
     // 订单列表
     getAllOrderLists(statusData,currentPage) {
@@ -47,7 +59,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/order/lists', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/order/order/lists` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -126,7 +138,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/order/cancel', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/order/order/cancel` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -173,7 +185,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/order/deleteOrder', // 仅为示例，并非真实的接口地址
+            url: `${domin.testdom}/mall/order/order/deleteOrder` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -210,4 +222,47 @@ Page({
             }
         })
     },
+    // 确认收货
+      getGoods(e){
+        var that = this;
+        swan.showLoading({
+            title: '加载中',
+            mask: true
+        });
+        console.log(e.currentTarget.dataset.osn)
+        this.setData({
+            allOrderLists:[]
+        })
+        swan.request({
+            url: `${domin.testdom}/mall/order/buyer/finish` , // 仅为示例，并非真实的接口地址
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                osn:e.currentTarget.dataset.osn
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'cookie': swan.getStorageSync('ZWCOOKIES')
+            },
+            success: (res) => {
+                console.log(res.data);
+                if (res.data.error_code == 0) {
+                    swan.showToast({
+                        title: "已确认收货",
+                    })
+                    that.getAllOrderLists(swan.getStorageSync("tabState"),1)
+                    swan.hideLoading()
+                } else {
+                    swan.showToast({
+                        title: res.data.error_msg,
+                    })
+                    swan.hideLoading()
+                }
+            },
+            fail: (err) => {
+                console.log('错误码：' + err.errCode);
+                console.log('错误信息：' + err.errMsg);
+            }
+        })
+      },
 });

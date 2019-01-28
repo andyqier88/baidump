@@ -13,9 +13,9 @@
           <view class="selem {{sortPrices === 3 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "3"><span>500-2000元</span></view>
           <view class="selem {{sortPrices === 4 ? 'activ' : ''}}" bind:tap="selSch" data-sortnum = "4"><span>2000-5000元</span></view>
           <view class="inx-nav-pay">
-            <input class="input" type="text"  v-model="lowPrice" placeholder="最低价" />
+            <input class="input" type="text" bindinput="watchLowPrice" placeholder="最低价" />
             <view class="sav-line"></view>
-            <input class="input" type="text" v-model="highPrice" placeholder="最高价" />
+            <input class="input" type="text" bindinput="watchHighPrice" placeholder="最高价" />
             <view class="savSec" bind:tap="savSec">完成</view>
           </view>
         </view>
@@ -52,7 +52,7 @@
       </view>
     </view>
    <view s-if="is_empty" style="text-align: center;padding-top: 50px;color:#9c9c9c">
-      <image src="../../images/no-data.png" alt="" style="width: 155px;"></image>
-      <p>暂无发现数据</p>
+      <image src="../../images/no-data.png" alt="" style="width: 120px;height: 80px;"></image>
+      <view style="font-size: 0.15rem;">暂无发现数据</view>
     </view>
   </view>
