@@ -18,7 +18,7 @@
 	<view class="address-common">
 		<text>省份</text>
 			<picker style="display:inline-block" mode="selector" bind:change="provChange"  range="{{provinces}}"   title="省市区选择器">
-				<view class="picker">
+				<view class="picker" style="width:100%">
 					{{provinceName?provinceName:provinces[proValue]}}
 				</view>
 			</picker>

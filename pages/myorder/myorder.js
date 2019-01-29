@@ -12,12 +12,12 @@ Page({
         currentPage:1,
         isLoading: true,
         listLength: 0,
-        tabItems:[{name:"所有订单",status:"0,1,2,3,14,15,16,21,22,23,24,25,35,36,100"},
+        tabItems:[{name:"所有订单",status:"0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100"},
                 {name:"待付款",status:"0"},
                 {name:"待发货",status:"1"},
                 {name:"已发货",status:"2"},
-                {name:"售后中",status:"14,15,24,25,35"},
-                {name:"已完成",status:"3"}],
+                {name:"售后中",status:"14,15,25,45"},
+                {name:"已完成",status:"3,24,35"}],
         tabNum:0,
         hideMore:true
     },
@@ -25,8 +25,8 @@ Page({
     //     this.getAllOrderLists()
     // },
     onLoad: function () {
-        this.getAllOrderLists("0,1,2,3,14,15,16,21,22,23,24,25,35,36,100")
-        swan.setStorageSync('tabState',"0,1,2,3,14,15,16,21,22,23,24,25,35,36,100")
+        this.getAllOrderLists("0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100")
+        swan.setStorageSync('tabState',"0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100")
     },
     // tab 切换
     tabClick(e) {

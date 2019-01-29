@@ -29,8 +29,8 @@ Page({
         ziTiState: false,//自提状态
         aid: '',//地址id
         goodCountFromStro: 1,
-        goodsid:'',
-        goodsname:''
+        goodsid: '',
+        goodsname: ''
     },
 
     // 详情数据加载
@@ -66,7 +66,7 @@ Page({
     },
     // 获取默认地址
     getAddress() {
-       var that = this;
+        var that = this;
         swan.request({
             url: 'https://dev-app.16988.cn/mall/user/address/lists', //仅为示例，并非真实的接口地址
             method: 'GET',
@@ -81,18 +81,19 @@ Page({
                 if (res.data.error_code == 0) {
                     // swan.setStorageSync('priceToVoucher', res.data.data.item[0].g_price);
                     that.setData({
-                        isAddressNull : res.data.data.length,
-                        addressMessage : res.data.data[0],
+                        isAddressNull: res.data.data.length,
+                        addressMessage: res.data.data[0],
                         loading: false,
                     })
+                    
                     swan.hideLoading()
-                    if(res.data.data.length == 0){
+                    if (res.data.data.length == 0) {
                         swan.showModal({
                             title: '',
                             content: '您未设置收货地址，请设置收货地址',
                             cancelColor: '#000000',
                             confirmColor: '#CEA068',
-                            confirmText:"设置地址",
+                            confirmText: "设置地址",
                             success: function (res) {
                                 if (res.confirm) {
                                     console.log('用户点击了确定');
@@ -119,11 +120,11 @@ Page({
         that.setData({
             goodsid: options.link,
             uid: swan.getStorageSync('loginData').u_id,
-            goodCountFromStro:swan.getStorageSync('goodCountFromStro')
+            goodCountFromStro: swan.getStorageSync('goodCountFromStro')
         })
     },
     // 用户留言
-    bindLeaveInput:function (e) {
+    bindLeaveInput: function (e) {
         console.log(e)
         this.setData({
             leaveWord: e.detail.value
@@ -136,7 +137,7 @@ Page({
             url: '../index/index'
         })
     },
-    choAddress(){
+    choAddress() {
         swan.navigateTo({
             url: '/pages/address/address'
         });
@@ -152,31 +153,31 @@ Page({
             maskCart: false
         })
     },
-// 购物车加法
-    pluAcount(){
+    // 购物车加法
+    pluAcount() {
         var that = this;
         that.data.goodCountSto = swan.getStorageSync('goodCountFromStro')
-        
+
         that.setData({
-            goodCountSto:that.data.goodCountSto++
+            goodCountSto: that.data.goodCountSto++
         })
         that.data.goodCountSto++
-        swan.setStorageSync('goodCountFromStro',that.data.goodCountSto++);
+        swan.setStorageSync('goodCountFromStro', that.data.goodCountSto++);
         // console.log(that.data.goodCount++)
     },
     // 购物车减法
-    minAcount(){
+    minAcount() {
         var that = this;
         var goodCountSto = swan.getStorageSync('goodCountFromStro')
-        if(swan.getStorageSync('goodCountFromStro')>1){
+        if (swan.getStorageSync('goodCountFromStro') > 1) {
             goodCountSto--
             that.setData({
-                goodCountFromStro:goodCountSto--
+                goodCountFromStro: goodCountSto--
 
             })
         }
         // console.log(this.data.goodCount--)
-        swan.setStorageSync('goodCountFromStro',swan.getStorageSync('goodCountFromStro'));
+        swan.setStorageSync('goodCountFromStro', swan.getStorageSync('goodCountFromStro'));
     },
     buyNow() {
         console.log('moe')
@@ -230,7 +231,7 @@ Page({
     //     });
     // },
     // 
-     submitOrder(){
+    submitOrder() {
         var that = this;
         swan.request({
             url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
@@ -238,9 +239,9 @@ Page({
             data: {
                 uid: '',
                 gid: that.data.goodsid,
-                aid:that.data.addressMessage.a_id,
-                count:swan.getStorageSync('goodCountFromStro'),
-                guestContent:that.data.leaveWord || ''
+                aid: that.data.addressMessage.a_id,
+                count: swan.getStorageSync('goodCountFromStro'),
+                guestContent: that.data.leaveWord || ''
             },
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -254,9 +255,9 @@ Page({
                         data: {
                             tradeId: res.data.data.order_id,
                             subject: that.data.goodsItem.g_name,
-                            totalAmount:that.data.goodsItem.g_price*100,
-                            timeout:'30',
-                            from:'1'
+                            totalAmount: that.data.goodsItem.g_price * 100,
+                            timeout: '30',
+                            from: '1'
                         },
                         header: {
                             'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -268,21 +269,41 @@ Page({
                                     url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
                                     method: 'POST',
                                     data: {
-                                        payChannel: 3,
+                                        payChannel: 9,
                                         tradeId: res.data.data.order_id
-                                        
+
                                     },
                                     header: {
                                         'content-type': 'application/x-www-form-urlencoded', // 默认值
                                         "cookie": swan.getStorageSync('ZWCOOKIES')
                                     },
                                     success: function (res2) {
+                                        console.log(res2.data.data)
+                                        var resw = res2.data.data.payInfo9
+                                        console.log(resw)
                                         if (res2.data.error_code == 0) {
-                                            var linkData = `https://openapi.alipay.com/gateway.do?${res2.data.data.payInfo3}`
-                                            swan.navigateTo({
-                                                url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+                                            // var linkData = `https://openapi.alipay.com/gateway.do?${res2.data.data.payInfo3}`
+                                            // swan.navigateTo({
+                                            //     url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+                                            // });
+                                            // swan.hideLoading()
+
+                                            swan.requestPolymerPayment({
+                                                orderInfo: resw,
+                                                success: function (resp) {
+                                                    swan.showToast({
+                                                        title: '支付成功',
+                                                        icon: 'success'
+                                                    });
+                                                },
+                                                fail: function (err) {
+                                                    swan.showToast({
+                                                        title: "支付失败",
+                                                        duration: 5000
+                                                    });
+                                                    console.log('pay fail', err);
+                                                }
                                             });
-                                            swan.hideLoading()
                                         }
                                     }
                                 });

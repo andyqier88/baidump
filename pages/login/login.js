@@ -66,7 +66,7 @@ Page({
         }
         if (!/^1[34578][0-9]{9}$/.test(this.data.phoneNum.replace(/\s*/g, ''))) {
             swan.showToast({
-                title: '手机号必须'
+                title: '手机号不对'
             });
             return false;
         }

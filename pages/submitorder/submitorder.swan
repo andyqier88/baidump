@@ -74,7 +74,7 @@
 			<text style="float:right;font-size:22px;color:#dda559" s-else>￥{{swan.fixed(goodsItem.g_price*goodCountFromStro)}}</text>
 		</view>
 	</view>
-	<view bind:tap="submitOrder" class="pay-by-ali">支付宝支付</view>
+	<view bind:tap="submitOrder" class="pay-by-ali">去支付</view>
 	<filter module="swan">
 		export default {
 			fixed: function(str) {

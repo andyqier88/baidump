@@ -27,8 +27,10 @@ Page({
                         artisnLists: res.data.data,
                     })
                 }
+                swan.stopPullDownRefresh()
             },
             fail: (err) => {
+                swan.stopPullDownRefresh()
                 console.log(res.data);
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
@@ -41,4 +43,8 @@ Page({
             url: `/pages/ingenuitydetail/ingenuitydetail?uid=${e.currentTarget.dataset.uid}`
         })
     },
+    // 下拉刷新
+    onPullDownRefresh: function(e) {
+        this.getList();
+	},
 });

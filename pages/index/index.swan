@@ -15,24 +15,27 @@
 			</swiper-item>
 		</block>
       </swiper> -->
-	  <view class="cate-list">
-            <view s-for="item in V2Category" data-cgid="{{item.cg_id}}" data-cids="{{item.c_ids}}" class="cate-item"  bind:tap="gotoV2CateIndex">
-                <image style="width:55px;height:55px;" src="{{item.cg_icon}}" ></image>
-                <view>{{item.cg_name}}</view>
-            </view>
-        </view>
-	  <!-- 热门活动 -->
-	  <view s-if="adHotList.length" class="hot-title">
-            <text>热门活动</text>
-        </view>
-        <view s-if="adHotList.length" class="hot-active">
-            <view s-for="em in adHotList" class="hot-item">
-                <image src="{{em.a_image}}" bind:tap="gotoWebview" data-bannerurl="{{em.link}}" mode='widthFix'></image>
-                <view>{{em.title}}</view>
-            	
+	<scroll-view scroll-x class="scroll-view" bind:scrolltoupper="toLeft" bind:scrolltolower="toRight" scroll-into-view="one"
+	 upper-threshold="1" lower-threshold="1" bind:scroll="myscroll">
+		<view class="cate-list">
+			<view s-for="item in V2Category" data-cgid="{{item.cg_id}}" data-cids="{{item.c_ids}}" class="cate-item" bind:tap="gotoV2CateIndex">
+				<image style="width:55px;height:55px;" src="{{item.cg_icon}}"></image>
+				<view>{{item.cg_name}}</view>
 			</view>
-            
-            <!-- <view class="hot-item">
+		</view>
+	</scroll-view>
+	<!-- 热门活动 -->
+	<view s-if="adHotList.length" class="hot-title">
+		<text>热门活动</text>
+	</view>
+	<view s-if="adHotList.length" class="hot-active">
+		<view s-for="em in adHotList" class="hot-item">
+			<image src="{{em.a_image}}" bind:tap="gotoWebview" data-bannerurl="{{em.link}}" mode='widthFix'></image>
+			<view>{{em.title}}</view>
+
+		</view>
+
+		<!-- <view class="hot-item">
                 <img src="../images/2.png" alt="">
                 <p>新年福器</p>
             </view>
@@ -40,23 +43,26 @@
                 <img src="../images/3.png" alt="">
                 <p>紫砂茶具</p>
             </view> -->
-        </view>
+	</view>
 	<!-- 为你推荐 -->
 	<view style="padding-bottom:50px;">
-		<view class="recommend-title" >
+		<view class="recommend-title">
 			<text>为你优选</text>
 		</view>
 
 		<!--商品模块-->
 		<view class="shop_item">
-			<view class="list" s-for="item in discoverList" >
-                <!-- style="backgroundImage:url({{item.g_surfaceImg.gi_img}}!c400)" -->
-				<view class="image_box" bind:tap="gotoDetail" data-goodid='{{item.g_id}}'>
-					<image mode='widthFix' s-if="item.g_surfaceImg.gi_img" class="imageg" src="{{item.g_surfaceImg.gi_img}}!c400">< /image>
+			<view class="list" s-for="item in discoverList">
+				<!-- style="backgroundImage:url({{item.g_surfaceImg.gi_img}}!c400)" -->
+				<view class="image_box" s-if="item.g_surfaceImg.gi_img!=''" bind:tap="gotoDetail" data-goodid='{{item.g_id}}'>
+					<image mode='widthFix' binderror="errorImg"  class="imageg" src="{{item.g_surfaceImg.gi_img}}!c400">< /image>
+				</view>
+				<view s-else bind:tap="gotoDetail" data-goodid='{{item.g_id}}'>
+					<image mode='widthFix' class="imageg" src="http://zhangwan-picture-prod.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201901/09/17333262639.png"></image>
 				</view>
 				<view class="goods">
 					<view class="product_name">
-						<span class="iconfont icon-ziying prod_zys"></span>
+						<view class="iconfont icon-ziying prod_zys"></view>
 						<view class="g-name">{{item.g_name}}</view>
 					</view>
 					<view s-if="item.g_slogan" class="sale_msg">{{item.g_slogan}}</view>
@@ -68,6 +74,9 @@
 					</view>
 				</view>
 			</view>
+		</view>
+		<view class="zizhi" bind:tap="gotoZizhi">
+            <image mode='widthFix' src="../../images/img.png" ></image>
 		</view>
 	</view>
 </view>

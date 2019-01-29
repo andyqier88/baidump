@@ -60,6 +60,26 @@ Page({
             }
         });
     },
+    // 增加访问商品的历史
+      goodsHisAdd(){
+        var that = this;
+        swan.request({
+            url: `${domin.testdom}/user/visit/goodsHisAdd` , //仅为示例，并非真实的接口地址
+            data: {
+                id: that.data.goodsid
+            },
+            header: {
+                'content-type': 'application/json', // 默认值
+                'cookie': swan.getStorageSync('ZWCOOKIES')
+            },
+            success: function (res) {
+                console.log(res.data.data);
+                if (res.data.error_code == 0) {
+                    swan.hideLoading()
+                }
+            }
+        });
+      },
     isShowAll: function () {
         this.setData({
             showAll: true
@@ -142,6 +162,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.getDetail()
+        this.getDetail();
+        this.goodsHisAdd()
     },
 })

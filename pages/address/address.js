@@ -34,7 +34,13 @@ Page({
     },
     onLoad: function () {
         this.getCode();
-        this.getAddress()
+        this.getAddress();
+        if(this.data.aid &&swan.getStorageSync('proValueCode') !=''){
+            this.selectProCode(swan.getStorageSync('proValueCode'))
+        }
+        if(this.data.aid &&swan.getStorageSync('cityValueCode') !=''){
+            this.selectCityCode(swan.getStorageSync('cityValueCode'))
+        }
     },
     // 获取默认地址
     getAddress() {
@@ -51,17 +57,21 @@ Page({
                 isDefault: '1'
             },
             success: (res) => {
-                if (res.data.error_code == 0) {
+                if (res.data.data.length != 0) {
+                    var resw = res.data.data[0]
                     that.setData({
                         addressMessage: res.data.data[0],
-                        name: res.data.data[0].a_name,
-                        phone: res.data.data[0].a_phone,
-                        address: res.data.data[0].a_address,
-                        provinceName: res.data.data[0].a_provinceName,
-                        cityName: res.data.data[0].a_cityName,
-                        areaName: res.data.data[0].a_areaName,
-                        aid: res.data.data[0].a_id
+                        name: resw.a_name ,
+                        phone: resw.a_phone,
+                        address: resw.a_address,
+                        provinceName: resw.a_provinceName,
+                        cityName: resw.a_cityName,
+                        areaName: resw.a_areaName,
+                        aid: resw.a_id
                     })
+                    swan.setStorageSync('proValueCode', res.data.data[0].a_provinceCode);
+                    swan.setStorageSync('cityValueCode', res.data.data[0].a_cityCode);
+                    swan.setStorageSync('areaValueCode', res.data.data[0].a_areaCode);
                 }
             },
             fail: (err) => {
@@ -122,6 +132,8 @@ Page({
                         arr.push(citysObj[i])
                     }
                     that.setData({
+                        cityName: '',
+                        areaName: '',
                         cityArrs:arr,
                         cityCodess:arrCode
                     })
@@ -159,6 +171,7 @@ Page({
                         areaArr:arr,
                         areaCodess:arrCode
                     })
+                    swan.setStorageSync('areaValueCode',that.data.areaCodess[0]);
                 }
             },
             fail: (err) => {
@@ -223,11 +236,37 @@ Page({
             isDefault: '1',
             uid: swan.getStorageSync('loginData').u_id,
         }
-        if (that.aid) {
-            objAddress.id = that.aid
+        if (that.data.aid) {
+            objAddress.id = that.data.aid
         }
+        if(that.data.name ==''){
+            swan.showToast({
+                title:'名字不能为空'
+            })
+            return false
+        }
+        if(that.data.phone ==''){
+            swan.showToast({
+                title:'手机号不能为空'
+            })
+            return false
+        }
+        if (!/^1[34578][0-9]{9}$/.test(that.data.phone.replace(/\s*/g,''))){
+                swan.showToast({
+                    title:'手机号不对'
+                })
+                return false;
+            }
         if (!that.data.address) {
-            swan.showToast('请填写详细地址')
+            swan.showToast({
+                title:'请填写详细地址'
+            })
+            return false
+        }
+        if(swan.getStorageSync('areaValueCode') ==''){
+            swan.showToast({
+                title:'根据城市选择区县'
+            })
             return false
         }
         swan.request({
@@ -245,6 +284,10 @@ Page({
                     swan.navigateBack({
                         delta:1
                     });
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
             },
             fail: (err) => {
@@ -258,16 +301,29 @@ Page({
     provChange: function (e) {
         this.setData({
             proValue: e.detail.value,
-            cityArrs:['选择']
+            cityArrs:['选择'],
+            provinceName: '',
+            cityName: '',
+            areaName: '',
+            areaArr:[]
         });
+        // 清空
+        swan.setStorageSync('cityValueCode','');
+        swan.setStorageSync('areaValueCode','');
         var proValueCode = this.data.provincesCodes[e.detail.value]
         swan.setStorageSync('proValueCode',proValueCode);
+        console.log(proValueCode)
         this.selectProCode(swan.getStorageSync('proValueCode'))
     },
+    // chooseCity(){
+    //     this.selectCityCode(swan.getStorageSync('cityValueCode'))
+    // },
     // 城市
     cityChange: function (e) {
+        console.log(e.detail)
         this.setData({
-            cityValue: e.detail.value
+            cityValue: e.detail.value,
+            areaArr:[]
         });
         var cityValueCode = this.data.cityCodess[e.detail.value]
         swan.setStorageSync('cityValueCode',cityValueCode);

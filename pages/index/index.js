@@ -38,6 +38,15 @@ Page({
         this.hotActive();
         this.getV2Category();
     },
+    errorImg(e){
+        console.log(e)
+    },
+    gotoZizhi(){
+        var linkData = "https://app.16988.cn/html/apph5/organiZation.html#/index"
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+        })
+    },
     // 分类获取
     getV2Category(){
         swan.request({
@@ -79,10 +88,12 @@ Page({
                 this.setData({
                     adHotList: res.data.data
                 })
+                swan.stopPullDownRefresh()
             },
             fail: (err) => {
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
+                swan.stopPullDownRefresh()
             }
         })
     },
@@ -108,10 +119,12 @@ Page({
                 this.setData({
                     discoverList: res.data.data
                 })
+                swan.stopPullDownRefresh()
             },
             fail: (err) => {
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
+                swan.stopPullDownRefresh()
             }
         })
     },
@@ -122,4 +135,9 @@ Page({
             url: `/pages/detail/detail?link=${e.currentTarget.dataset.goodid}`
         })
     },
+    onPullDownRefresh: function(e) {
+		// Do something when pull down.
+        this.hotActive();
+        this.getdiscoverList();
+	},
 });

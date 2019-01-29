@@ -2,7 +2,41 @@
  * @file swan index apiDemo's css
  * @author renzhonghua
  */
+.scroll-view {
+    height: 1.16rem;
+    white-space: nowrap;
+    /* padding: 0 .25rem; */
+    font-size: 0;
+    background: #fff;
+    border-bottom: 10px solid #f6f6f6;
+}
 
+.row-view {
+    display: inline-block !important;
+    width: 100%;
+    height: 1.66rem;
+    line-height: 1.66rem;
+    font-size: 20px;
+}
+.zizhi{
+    position: fixed;
+    right: 10px;
+    bottom: 60px;
+    background: #CEA068;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    
+}
+.zizhi image{
+        width: 30px;
+        margin: 0 auto;
+        height: 30px;
+        /* padding: 10px; */
+    }
 .group {
     font-size: .15rem;
 }
@@ -81,7 +115,7 @@ image{
 .cate-list{
     padding: 10px 0px;
     text-align: center;
-    border-bottom: 10px solid #f6f6f6;
+    /* border-bottom: 10px solid #f6f6f6; */
     font-size: 14px;
     color: #232428;
     background: #fff;
