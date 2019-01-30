@@ -105,6 +105,9 @@ Page({
                                 }
                             }
                         });
+                        swan.setStorageSync('proValueCode','');
+                        swan.setStorageSync('cityValueCode','' );
+                        swan.setStorageSync('areaValueCode', '');
                     }
                 }
             }
@@ -124,8 +127,7 @@ Page({
         })
     },
     // 用户留言
-    bindLeaveInput: function (e) {
-        console.log(e)
+    bindLeaveInput (e) {
         this.setData({
             leaveWord: e.detail.value
         });
@@ -183,56 +185,14 @@ Page({
         console.log('moe')
     },
     // 提交订单
-    // submitOrder(){
-    //     var that = this;
-    //     swan.request({
-    //         url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
-    //         method: 'POST',
-    //         data: {
-    //             uid: '',
-    //             gid: that.data.goodsid,
-    //             aid:that.data.addressMessage.a_id,
-    //             count:swan.getStorageSync('goodCountFromStro'),
-    //             guestContent:that.data.leaveWord || ''
-    //         },
-    //         header: {
-    //             'content-type': 'application/x-www-form-urlencoded', // 默认值
-    //             "cookie": swan.getStorageSync('ZWCOOKIES')
-    //         },
-    //         success: function (res) {
-    //             if (res.data.error_code == 0) {
-    //                 swan.request({
-    //                     url: 'https://dev-app.16988.cn/mall/order/pay/get', //仅为示例，并非真实的接口地址
-    //                     method: 'POST',
-    //                     data: {
-    //                         tradeId: res.data.data.order_id,
-    //                         subject: that.data.goodsItem.g_name,
-    //                         totalAmount:that.data.goodsItem.g_price*100,
-    //                         timeout:'30',
-    //                         from:'1'
-    //                     },
-    //                     header: {
-    //                         'content-type': 'application/x-www-form-urlencoded', // 默认值
-    //                         "cookie": swan.getStorageSync('ZWCOOKIES')
-    //                     },
-    //                     success: function (res1) {
-    //                         if (res1.data.error_code == 0) {
-    //                             var linkData = `https://dev-app.16988.cn/mall/order/pay/init?payChannel=3&tradeId=${res.data.data.order_id}`
-    //                             swan.navigateTo({
-    //                                 url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
-    //                             });
-    //                             swan.hideLoading()
-    //                         }
-    //                     }
-    //                 });
-    //                 swan.hideLoading()
-    //             }
-    //         }
-    //     });
-    // },
-    // 
     submitOrder() {
         var that = this;
+        if(!that.data.isAddressNull){
+            swan.showToast({
+                title:'地址不能为空'
+            })
+            return false
+        }
         swan.request({
             url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
             method: 'POST',
@@ -282,14 +242,9 @@ Page({
                                         var resw = res2.data.data.payInfo9
                                         console.log(resw)
                                         if (res2.data.error_code == 0) {
-                                            // var linkData = `https://openapi.alipay.com/gateway.do?${res2.data.data.payInfo3}`
-                                            // swan.navigateTo({
-                                            //     url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
-                                            // });
-                                            // swan.hideLoading()
-
                                             swan.requestPolymerPayment({
                                                 orderInfo: resw,
+                                                bannedChannels:['BDWallet'],
                                                 success: function (resp) {
                                                     swan.showToast({
                                                         title: '支付成功',
@@ -299,7 +254,7 @@ Page({
                                                 fail: function (err) {
                                                     swan.showToast({
                                                         title: "支付失败",
-                                                        duration: 5000
+                                                        duration: 2000
                                                     });
                                                     console.log('pay fail', err);
                                                 }
@@ -307,10 +262,24 @@ Page({
                                         }
                                     }
                                 });
+                            }else{
+                               swan.showModal({
+                                    content:res1.data.error_msg,
+                                    duration: 2000,
+                                    complete:function(){
+                                        swan.navigateTo({
+                                            url: '/pages/myorder/myorder'
+                                        });
+                                    }
+                                })
                             }
                         }
                     });
                     swan.hideLoading()
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
             }
         });

@@ -31,6 +31,7 @@ Page({
         goodCount: 1, //购物车数量
         totalGoodCount: 0,
         cartCount: 0,
+        hidecsState:0,
     },
 
     // 详情数据加载
@@ -66,7 +67,7 @@ Page({
         swan.request({
             url: `${domin.testdom}/user/visit/goodsHisAdd` , //仅为示例，并非真实的接口地址
             data: {
-                id: that.data.goodsid
+                gid: that.data.goodsid
             },
             header: {
                 'content-type': 'application/json', // 默认值
@@ -85,6 +86,26 @@ Page({
             showAll: true
         })
     },
+    // 隐藏客服按钮
+    hidecs(){
+        var that = this;
+        swan.request({
+            url: `${domin.testdom}/common/ui/isShow` , //仅为示例，并非真实的接口地址
+            data: {
+                id: "baidu_mini_goods_detail_custom_service_button"
+            },
+            header: {
+                'content-type': 'application/json', // 默认值
+                'cookie': swan.getStorageSync('ZWCOOKIES')
+            },
+            success: function (res) {
+                console.log(res.data.data);
+                if (res.data.error_code == 0) {
+                    that.data.hidecsState = res.data.data
+                }
+            }
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -96,6 +117,7 @@ Page({
             uid: swan.getStorageSync('loginData').u_id
         })
         swan.setStorageSync('goodCountFromStro',1);
+        this.hidecs()
     },
     // 跳转首页
     gotoIndex: function () {
@@ -118,11 +140,25 @@ Page({
     // 购物车加法
     pluAcount(){
         var that = this;
+        if(Number(that.data.detailData.g_price)===0){
+            swan.showToast({
+                title:'限购一件'
+            })
+            return false
+        }
+        if(Number(that.data.detailData.g_stock)<=that.data.goodCount){
+            swan.showToast({
+                title:'库存不足'
+            })
+            return false
+        }
         this.data.goodCount++
         that.setData({
             goodCount:that.data.goodCount++
         })
+        
         swan.setStorageSync('goodCountFromStro',that.data.goodCount);
+        
         // console.log(that.data.goodCount++)
     },
     // 购物车减法
@@ -133,6 +169,10 @@ Page({
             that.data.goodCount--
             that.setData({
                 goodCount:that.data.goodCount--
+            })
+        }else{
+            swan.showToast({
+                title:'数量不能为0'
             })
         }
         // console.log(this.data.goodCount--)

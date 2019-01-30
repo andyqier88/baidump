@@ -8,14 +8,30 @@
         <images src="{{infoMes.u_avatar}}"  ></images>
       </view>
       <view s-if="infoMes.ua_desc" class="h2">艺术家简介</view>
-      <text s-html="infoMes.ua_desc">{{infoMes.ua_desc}}</text>
+      <text style="color:#A9AAAE;margin-bottom:10px;" s-html="infoMes.ua_desc">{{infoMes.ua_desc}}</text>
 
       <template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
     </view>
-    <!-- <view>
-      <h2 v-if="ShopLists.length">艺术家作品</h2>
-      <view class="shop-wrapper">
-        <two-clumns :ShopLists="ShopLists"></two-clumns>
+    <view v-if="ShopLists.length">
+      <view style="text-align: center;">艺术家作品</view>
+      <view class="shop_item">
+        <view class="list" s-for="em in ShopLists" bind:tap="goDatil" data-goodid="{{em.g_id}}">
+          <view class="image_box" bind:tap="gotoDetail" data-goodid="{{em.g_id}}" style="background:url({{em.g_surfaceImg.gi_img}});background-size:cover;">
+          </view>
+          <view class="goods">
+            <view class="product_name">
+              <span class="iconfont icon-ziying prod_zys"></span>
+              <view class="g-name">{{em.g_name}}</view>
+            </view>
+            <view s-if="em.g_slogan" class="sale_msg">{{em.g_slogan}}</view>
+            <view class="product_info">
+              <view s-if="em.isSeckill > 0" class="iconfont icon-redhost"></view>
+              <view s-if="em.isSeckill > 0" class="price">￥{{em.g_activityPrice}}</view>
+              <view s-else class="price">￥{{em.g_price}}</view>
+              <view s-if="em.isSeckill > 0" class="cost_price">￥{{em.g_price}}</view>
+            </view>
+          </view>
+        </view>
       </view>
-    </view> -->
+    </view>
   </view>

@@ -21,7 +21,7 @@
 				<text style="color: rgba(153,153,153,1)">{{detailData.o_phone}}</text>
 			</view>
 		</view>
-		<view class="order-address">{{detailData.o_provinceName}}{{detailData.o_areaName}} {{detailData.o_address}}</view>
+		<view class="order-address">{{detailData.o_provinceName}} {{detailData.o_cityName}} {{detailData.o_areaName}} {{detailData.o_address}}</view>
 	</view>
 	<!-- 购买商品列表 -->
 	<view class="buy-goods">
@@ -63,7 +63,8 @@
 		<view class="buyer-word-wrapper">
 			<view>
 				<text>买家留言</text>
-				<input style="width:70%;background:#fff; display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindinput="bindLeaveinput" />
+				<view style="display:inline-block">{{detailData.o_guestContent}}</view>
+				<!-- <input style="width:70%;background:#fff; display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindinput="bindLeaveinput" /> -->
 			</view>
 		</view>
 		<view class="order-mess">
@@ -138,8 +139,8 @@
                     <text>￥{{detailData.o_pay}}</text>
 			</text>
 		</view>
-		<view class="payOrder">
-			<text href="http://a.app.qq.com/o/simple.jsp?pkgname=art.jupai.com.jupai">联系客服</text>
+		<view class="payOrder" bind:tap="gotoKefu">
+			<text>联系客服</text>
 		</view>
 	</view>
 </view>

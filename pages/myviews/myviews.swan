@@ -1,5 +1,5 @@
     <view class="collect-wrapper">
-      <view>
+      <view s-if="goodsHisLists.length>0">
          <view s-for="items in goodsHisLists"   class="sec-wrapper">
             <!-- {{items}} -->
             <view class="sec-wrapper-inner" bind:tap="gotoViewDetail" data-goodid="{{items.g_id}}">
@@ -17,5 +17,9 @@
                 </view>
             </view>
         </view>
+      </view>
+      <view s-else class="noviews">
+          <image src="../../images/noview.png"></image>
+          <view> 您还没有留下足迹额~</view>
       </view>
     </view>

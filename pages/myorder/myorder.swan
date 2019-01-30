@@ -56,7 +56,7 @@
 			</view>
 			<!-- 已发货/待收货 -->
 			<view s-else-if="item.o_status == '2'" class="user-confim">
-				<view bind:tap="cancelOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">取消订单</view>
+				<!-- <view bind:tap="cancelOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">取消订单</view> -->
 				<!-- <view>联系卖家</view> -->
 				<view class="getDeli" bind:tap="getGoods" data-osn="{{item.o_sn}}" data-oid="{{cartItem.o_id}}">确认收货</view>
 			</view>
@@ -66,18 +66,18 @@
 			</view>
 			<!-- 已收货/交易完成 -->
 			<view s-else-if="item.o_status == '3'" class="user-confim">
-				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">删除订单</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
 				<!-- <view>联系卖家</view> -->
 			</view>
 			<!-- 交易取消 -->
             <view s-else-if="item.o_status == '11'" class="user-confim">
-              <view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">删除订单</view>
+              <view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
               <view class="getDeli"  data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}" bind:tap="submitOrder">重新购买</view>
             </view>
 			<!-- 退款申请中 -->
 			<view s-else-if="item.o_status == '21'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">删除订单</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
 			</view>
 			<!-- 退款中 -->
 			<view s-else-if="item.o_status == '22'" class="user-confim">
@@ -86,16 +86,19 @@
 			<!-- 申请退货等待卖家同意 -->
 			<view s-else-if="item.o_status == '15'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">取消订单</view>
+				<!-- <view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{cartItem.o_sn}}">取消订单</view> -->
 			</view>
 			<!-- 退款完成 -->
 			<view s-else-if="item.o_status == '23'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
-				<view bind:tap="cancelOrder" data-inx="{{index}}">取消订单</view>
+				<!-- <view bind:tap="cancelOrder" data-inx="{{index}}">取消订单</view> -->
 			</view>
 			<!-- 退款中 -->
 			<view s-else-if="item.o_status == '14'" class="user-confim">
 				<!-- <view>联系卖家</view> -->
+			</view>
+			<view s-else-if="item.o_status == '100'||item.o_status =='35'" class="user-confim">
+				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
 			</view>
 		</view>	
 	</view>

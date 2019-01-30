@@ -45,5 +45,11 @@ Page({
             }
         })
     },
-    
+    // 跳转详情
+    gotoDetail: function (e) {
+        console.log(e.currentTarget.dataset.goodid)
+        swan.navigateTo({
+            url: `/pages/detail/detail?link=${e.currentTarget.dataset.goodid}`
+        })
+    },
 });

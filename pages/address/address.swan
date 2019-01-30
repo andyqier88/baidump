@@ -1,11 +1,11 @@
 <view class="address">
 	<view class="address-common">
 		<text>收货人</text>
-		<input type="text" placeholder="请输入收货人姓名" value="{=name=}" bindinput="bindNameInput" />
+		<input class="flexright" type="text" placeholder="请输入收货人姓名" value="{=name=}" bindinput="bindNameInput" />
 	</view>
 	<view class="address-common">
 		<text>手机号</text>
-		<input type="text" placeholder="请输入手机号" value="{=phone=}" bindinput="bindPhoneInput"/>
+		<input class="flexright" type="text" placeholder="请输入手机号" value="{=phone=}" bindinput="bindPhoneInput"/>
 	</view>
 	<!-- <view class="address-common">
 		<text>省市区</text>
@@ -17,7 +17,7 @@
 	</view> -->
 	<view class="address-common">
 		<text>省份</text>
-			<picker style="display:inline-block" mode="selector" bind:change="provChange"  range="{{provinces}}"   title="省市区选择器">
+			<picker class="flexright" style="display:inline-block" mode="selector" bind:change="provChange"  range="{{provinces}}"   title="省市区选择器">
 				<view class="picker" style="width:100%">
 					{{provinceName?provinceName:provinces[proValue]}}
 				</view>
@@ -26,7 +26,7 @@
 	<view class="address-common" >
 		<text  >城市</text>
 		<!-- bind:tap="chooseCity" -->
-		<picker style="display:inline-block" mode="selector"  bind:change="cityChange"   value="{{cityArrs[index]}}" range="{{cityArrs}}" title="省市区选择器">
+		<picker class="flexright" style="display:inline-block" mode="selector"  bind:change="cityChange"   value="{{cityArrs[index]}}" range="{{cityArrs}}" title="省市区选择器">
 			<view class="picker">
 				{{cityName?cityName:cityArrs[cityValue]}}
 			</view>
@@ -34,7 +34,7 @@
 	</view>
 	<view  class="address-common">
 		<text>区县</text>
-		<picker style="display:inline-block" mode="selector" bind:change="areaChange" title="省市区选择器" range="{{areaArr}}" value="{{areaArr[index]}}">
+		<picker class="flexright" style="display:inline-block" mode="selector" bind:change="areaChange" title="省市区选择器" range="{{areaArr}}" value="{{areaArr[index]}}">
 			<view class="picker">
 				{{areaName?areaName:areaArr[areaValue]}}
 			</view>
@@ -57,7 +57,7 @@
 	</view> -->
 	<view class="address-common">
 		<text>详细地址</text>
-		<input type="text" placeholder="请输入详细地址" value="{=address=}"  bindinput="bindAddressInput"/>
+		<input class="flexright" type="text" placeholder="请输入详细地址" value="{=address=}"  bindinput="bindAddressInput"/>
 	</view>
 	<view class="save">
 		<view class="btn" bind:tap="postAddress">保存</view>

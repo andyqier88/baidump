@@ -69,7 +69,7 @@
 	</view>
 	<!--intro bottom  -->
 	<view class="bottom-buy">
-		<view class="item kefu" bind:tap="gotoWebview">
+		<view s-if="hidecsState" class="item kefu" bind:tap="gotoWebview">
 			<view><image src="../../images/kefu.png"></image><text style="margin-top: -13px; display: inherit;">客服</text></view>
 		</view>
 		<view bind:tap="showMask" class="item buy-now">立即购买</view>

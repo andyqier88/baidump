@@ -124,15 +124,15 @@ image{
         margin: 0 5px;
         color: #666;
         display: inline-block;
-        width: pxToRem(90px) !important;
+        width: 60px !important;
         padding: 5px;
         text-align: center;
         margin-right: 0px !important;
         
     }
    .cate-item image{
-            width: pxToRem(80px);
-            height: pxToRem(80px);
+            width: 60px;
+            height: 60px;
         }
 .sub-item:last-child:after {
     height: 0;
@@ -148,9 +148,9 @@ image{
 }
 .recommend-title{
         text-align: center;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        
+        padding-top: 20px;
+        padding-bottom: 10px;
+        background: #fff;
     }
     .recommend-title text{
             display: inline-block;

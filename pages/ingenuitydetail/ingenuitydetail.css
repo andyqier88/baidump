@@ -51,3 +51,201 @@ p {
 .shop-wrapper{
     padding:0 0.2rem 0.2rem;
 }
+.shop_item {
+  padding: 0 10px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+}
+.list {
+  background: #fff;
+  width: 48%;
+  margin-top: 0.1rem;
+}
+.image_box {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 100%;
+  }
+.price {
+    color: #cea068;
+    font-size: 0.15rem;
+    font-weight: 400; 
+  }
+  .cost_price {
+    color: #c7c7c7;
+    font-size: 0.15rem;
+    text-decoration: line-through;
+    font-weight: 100;
+  }
+.goods {
+    padding: 0.1rem;
+   
+    }
+     view {
+      box-sizing: initial;
+    }
+.iconfont:before {
+      color: #ea4141;
+      font-size: 0.15rem;
+      display: inline-block;
+      position: relative;
+      top: 0.15rem;
+    }
+  
+  .product_info {
+    display: flex;
+    align-items: flex-end;
+    height: 0.3rem;
+    line-height: 0.3rem;
+  }
+  .cost_price {
+    padding-left: 0.2rem;
+  }
+.sale_msg {
+    font-size: 0.15rem;
+    color: #c7c7c7;
+    padding: 0.05rem 0;
+  }
+  .shop_item {
+  padding: 0 10px;
+  background: #f7f7f7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+}
+.list {
+  background: #fff;
+  width:48%;
+  margin-top: 0.18rem;
+  
+}
+.image_box {
+    width: 100%;
+    height: 1.66rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 100%;
+  }
+  .image_box image {
+      width: 100%;
+      height: 2.74rem;
+    }
+  .product_name {
+    color: #1a1a1a;
+    font-size: 0.15rem;
+    display: flex;
+    align-items: center;
+    
+  }
+  .product_name .g-name{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .prod_zys:after {
+      font-size: 0.15rem;
+      color: #cea068;
+    }
+    div {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  .price {
+    color: #cea068;
+    font-size: 0.2rem;
+    font-weight: 400; 
+  }
+  .cost_price {
+    color: #c7c7c7;
+    font-size: 0.24rem;
+    text-decoration: line-through;
+    font-weight: 100;
+  }
+  .goods {
+    padding: 0.2rem;
+    
+  }
+  div {
+      box-sizing: initial;
+    }
+    .iconfont:before {
+      color: #ea4141;
+      font-size: 0.15rem;
+      display: inline-block;
+      position: relative;
+      top: 0.15rem;
+    }
+  .product_info {
+    display: flex;
+    align-items: flex-end;
+    height: 0.3rem;
+    line-height: 0.3rem;
+  }
+  .cost_price {
+    padding-left: 0.2rem;
+  }
+  .sale_msg {
+    font-size: 0.15rem;
+    color: #c7c7c7;
+    padding: 0.1rem 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .inx-nav-box {
+  /* height: 0.6rem; */
+  width: 100%;
+  background: #fff;
+  position: relative;
+  z-index: 5;
+}
+.inx-nav-alt {
+    position: absolute;
+    /* top: 1.07rem; */
+    left: 0;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    z-index: 7;
+    padding-left: 10px;
+  }
+  .sub-cate{
+    position: absolute;
+    top: 1.07rem;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 10;
+    height: 5rem;
+    overflow: scroll;
+}   
+.active{
+    color: #cea068;
+  }
+  .selem {
+    line-height: 0.4rem;
+    font-size: 0.15rem;
+    color: #666;
+    position: relative;
+
+  }
+    .bg-span{
+      background: #ececec;
+      width: 1.2rem;
+    }
+    span{
+      padding: 0 0.5rem 0 0;
+      padding-left: 0.3rem;
+      display: inline-block;
+      line-height: 1rem;
+    }
+    .topActive{
+      background: #fff;
+      color: #cea068;
+    }

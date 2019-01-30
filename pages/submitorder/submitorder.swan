@@ -60,7 +60,7 @@
 		<view class="deliver">运费<text s-if="Number(goodsItem.g_freightFee)">快递{{goodsItem.g_freightFee}}元</text> <text s-else>快递包邮</text> </view>
 		<view class="buyer-word-wrapper">
 			<text>买家留言</text>
-			<input style="display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindinput="bindLeaveinput" />
+			<input style="display: inline-block; padding-left:7px" type="text" placeholder="选填：填写内容已和卖家协商" bindinput="bindLeaveInput" />
 		</view>
 		<!-- 总价 -->
 		<view class="totalPrice">

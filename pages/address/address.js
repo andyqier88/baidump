@@ -33,12 +33,17 @@ Page({
         areaValue:0
     },
     onLoad: function () {
+        var that = this
         this.getCode();
         this.getAddress();
-        if(this.data.aid &&swan.getStorageSync('proValueCode') !=''){
+        console.log('proValueCode',that.data.addressMessage)
+        console.log('proValueCode',swan.getStorageSync('proValueCode') !='')
+        if(swan.getStorageSync('proValueCode') !=''){
+            
             this.selectProCode(swan.getStorageSync('proValueCode'))
         }
         if(this.data.aid &&swan.getStorageSync('cityValueCode') !=''){
+            console.log('cityValueCode')
             this.selectCityCode(swan.getStorageSync('cityValueCode'))
         }
     },
@@ -72,6 +77,10 @@ Page({
                     swan.setStorageSync('proValueCode', res.data.data[0].a_provinceCode);
                     swan.setStorageSync('cityValueCode', res.data.data[0].a_cityCode);
                     swan.setStorageSync('areaValueCode', res.data.data[0].a_areaCode);
+                }else{
+                    swan.setStorageSync('proValueCode','');
+                    swan.setStorageSync('cityValueCode','' );
+                    swan.setStorageSync('areaValueCode', '');
                 }
             },
             fail: (err) => {
@@ -132,8 +141,8 @@ Page({
                         arr.push(citysObj[i])
                     }
                     that.setData({
-                        cityName: '',
-                        areaName: '',
+                        // cityName: '',
+                        // areaName: '',
                         cityArrs:arr,
                         cityCodess:arrCode
                     })
@@ -323,6 +332,8 @@ Page({
         console.log(e.detail)
         this.setData({
             cityValue: e.detail.value,
+            cityName: '',
+            areaName: '',
             areaArr:[]
         });
         var cityValueCode = this.data.cityCodess[e.detail.value]
@@ -332,7 +343,8 @@ Page({
     // 区域
     areaChange: function (e) {
         this.setData({
-            areaValue: e.detail.value
+            areaValue: e.detail.value,
+            areaName: '',
         });
         var areaValueCode = this.data.areaCodess[e.detail.value]
         swan.setStorageSync('areaValueCode',areaValueCode);

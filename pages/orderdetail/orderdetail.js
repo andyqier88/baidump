@@ -93,9 +93,46 @@ Page({
     submitOrder(e) {
         console.log(e)
         var that = this;
-        var linkData = `${domin.testdom}/mall/order/pay/init?payChannel=3&tradeId=${e.currentTarget.dataset.osn}`
-        swan.navigateTo({
-            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+        swan.request({
+            url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
+            method: 'POST',
+            data: {
+                payChannel: 9,
+                tradeId: e.currentTarget.dataset.osn
+
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                "cookie": swan.getStorageSync('ZWCOOKIES')
+            },
+            success: function (res) {
+                console.log(res.data.data)
+                var resw = res.data.data.payInfo9
+                console.log(resw)
+                if (res.data.error_code == 0) {
+                    swan.requestPolymerPayment({
+                        orderInfo: resw,
+                        bannedChannels:['BDWallet'],
+                        success: function (resp) {
+                            swan.showToast({
+                                title: '支付成功',
+                                icon: 'success'
+                            });
+                        },
+                        fail: function (err) {
+                            swan.showToast({
+                                title: "支付失败",
+                                duration: 5000
+                            });
+                            console.log('pay fail', err);
+                        }
+                    });
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
+                }
+            }
         });
         // return false;
        
@@ -194,4 +231,11 @@ Page({
             }
         })
     },
+    // 联系客服
+    gotoKefu(){
+        var linkData = 'https://p.qiao.baidu.com/cps/chat?siteId=12769985&userId=26746183'
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}` 
+        })
+    }
 });

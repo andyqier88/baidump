@@ -55,4 +55,7 @@
       <image src="../../images/no-data.png" alt="" style="width: 120px;height: 80px;"></image>
       <view style="font-size: 0.15rem;">暂无发现数据</view>
     </view>
+    <view s-if="topState" class="back-top" bind:tap="gotoTop">
+      <image src="../../images/top.png"></image>
+    </view>
   </view>
