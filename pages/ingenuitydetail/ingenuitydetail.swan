@@ -12,8 +12,8 @@
 
       <template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
     </view>
-    <view v-if="ShopLists.length">
-      <view style="text-align: center;">艺术家作品</view>
+    <view style="background:#fff" v-if="ShopLists.length">
+      <view style="text-align: center;padding: 10px 0;">艺术家作品</view>
       <view class="shop_item">
         <view class="list" s-for="em in ShopLists" bind:tap="goDatil" data-goodid="{{em.g_id}}">
           <view class="image_box" bind:tap="gotoDetail" data-goodid="{{em.g_id}}" style="background:url({{em.g_surfaceImg.gi_img}});background-size:cover;">
