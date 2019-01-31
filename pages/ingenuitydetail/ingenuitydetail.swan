@@ -25,10 +25,10 @@
             </view>
             <view s-if="em.g_slogan" class="sale_msg">{{em.g_slogan}}</view>
             <view class="product_info">
-              <view s-if="em.isSeckill > 0" class="iconfont icon-redhost"></view>
-              <view s-if="em.isSeckill > 0" class="price">￥{{em.g_activityPrice}}</view>
+              <view s-if="em.isSecKill > 0" class="iconfont icon-redhost"></view>
+              <view s-if="em.isSecKill > 0" class="price">￥{{em.g_activityPrice}}</view>
               <view s-else class="price">￥{{em.g_price}}</view>
-              <view s-if="em.isSeckill > 0" class="cost_price">￥{{em.g_price}}</view>
+              <view s-if="em.isSecKill > 0" class="cost_price">￥{{em.g_price}}</view>
             </view>
           </view>
         </view>

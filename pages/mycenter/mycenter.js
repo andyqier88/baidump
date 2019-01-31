@@ -24,7 +24,7 @@ Page({
 
     myInfo() {
         swan.request({
-            url: `${domin.testdom}/user/common/myInfo` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/user/common/myInfo` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {

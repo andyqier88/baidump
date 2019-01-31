@@ -12,7 +12,7 @@ Page({
         currentPage: 1,
         isLoading: true,
         listLength: 0,
-        tabItems: [{ name: "所有订单", status: "0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100" },
+        tabItems: [{ name: "所有订单", status: "" },
         { name: "待付款", status: "0" },
         { name: "待发货", status: "1" },
         { name: "已发货", status: "2" },
@@ -23,10 +23,16 @@ Page({
     },
     // onLoad: function () {
     //     this.getAllOrderLists()
-    // },
+    // },0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100
     onLoad: function () {
-        this.getAllOrderLists("0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100")
-        swan.setStorageSync('tabState', "0,1,2,3,14,15,16,21,22,23,24,25,35,36,45,100")
+        
+        swan.setStorageSync('tabState', "")
+    },
+    onShow:function(){
+        this.setData({
+            allOrderLists: []
+        })
+        this.getAllOrderLists(swan.getStorageSync('tabState'))
     },
     // tab 切换
     tabClick(e) {
@@ -46,7 +52,7 @@ Page({
         console.log(e)
         var that = this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
+            url: 'https://app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
             method: 'POST',
             data: {
                 payChannel: 9,
@@ -64,6 +70,7 @@ Page({
                 if (res.data.error_code == 0) {
                     swan.requestPolymerPayment({
                         orderInfo: resw,
+                        bannedChannels:['BDWallet'],
                         success: function (resp) {
                             swan.showToast({
                                 title: '支付成功',
@@ -91,18 +98,30 @@ Page({
             title: '加载中',
             mask: true
         });
-        swan.request({
-            url: `${domin.testdom}/mall/order/order/lists`, // 仅为示例，并非真实的接口地址
-            method: 'POST',
-            dataType: 'json',
-            data: {
+        if(that.data.tabNum){
+            // 非全部订单
+            var dataJson = {
                 listType: 1,
                 uid: swan.getStorageSync('loginData').u_id,
                 status: statusData || ' ',
-                // page: that.data.page++||1,
                 page: currentPage || 1,
                 pageSize: 10
-            },
+            }
+        }else{
+            // 全部订单不使用status 字段
+            var dataJson = {
+                listType: 1,
+                uid: swan.getStorageSync('loginData').u_id,
+                page: currentPage || 1,
+                pageSize: 10
+            }
+        }
+        
+        swan.request({
+            url: `${domin.dom}/mall/order/order/lists`, // 仅为示例，并非真实的接口地址
+            method: 'POST',
+            dataType: 'json',
+            data: dataJson,
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'cookie': swan.getStorageSync('ZWCOOKIES')
@@ -171,7 +190,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: `${domin.testdom}/mall/order/order/cancel`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/order/cancel`, // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -218,7 +237,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: `${domin.testdom}/mall/order/order/deleteOrder`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/order/deleteOrder`, // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -267,7 +286,7 @@ Page({
             allOrderLists: []
         })
         swan.request({
-            url: `${domin.testdom}/mall/order/buyer/finish`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/buyer/finish`, // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -296,6 +315,11 @@ Page({
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
             }
+        })
+    },
+    gotoDetail(e){
+        swan.navigateTo({
+            url: `/pages/detail/detail?link=${e.currentTarget.dataset.gid}`
         })
     },
 });

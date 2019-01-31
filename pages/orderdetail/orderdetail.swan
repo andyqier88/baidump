@@ -118,7 +118,7 @@
 			</text>
 		</view>
 		<view class="payOrder">
-			<view bind:tap="submitOrder" data-osn="{{detailData.o_sn}}" data-gid="{{detailData.g_id}}">去支付</view>
+			<view bind:tap="goDetail" data-osn="{{detailData.o_sn}}" data-gid="{{detailData.g_id}}">重新购买</view>
 		</view>
 	</view>
 	<view s-else-if="detailData.o_status== '2'" class="bottom">
@@ -129,7 +129,7 @@
 			</text>
 		</view>
 		<view class="payOrder">
-			<view bind:tap="getGoods">确认收货</view>
+			<view bind:tap="getGoods" data-osn="{{detailData.o_sn}}" >确认收货</view>
 		</view>
 	</view>
 	<view s-else class="bottom">

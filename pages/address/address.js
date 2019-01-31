@@ -38,11 +38,14 @@ Page({
         this.getAddress();
         console.log('proValueCode',that.data.addressMessage)
         console.log('proValueCode',swan.getStorageSync('proValueCode') !='')
+        
+    },
+    onShow:function(){
         if(swan.getStorageSync('proValueCode') !=''){
             
             this.selectProCode(swan.getStorageSync('proValueCode'))
         }
-        if(this.data.aid &&swan.getStorageSync('cityValueCode') !=''){
+        if(swan.getStorageSync('cityValueCode') !=''){
             console.log('cityValueCode')
             this.selectCityCode(swan.getStorageSync('cityValueCode'))
         }
@@ -50,8 +53,11 @@ Page({
     // 获取默认地址
     getAddress() {
         var that= this;
+        swan.showLoading({
+            title: '加载中',
+        })
         swan.request({
-            url: `${domin.testdom}/mall/user/address/lists`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/lists`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -63,6 +69,7 @@ Page({
             },
             success: (res) => {
                 if (res.data.data.length != 0) {
+                    swan.hideLoading()
                     var resw = res.data.data[0]
                     that.setData({
                         addressMessage: res.data.data[0],
@@ -78,12 +85,17 @@ Page({
                     swan.setStorageSync('cityValueCode', res.data.data[0].a_cityCode);
                     swan.setStorageSync('areaValueCode', res.data.data[0].a_areaCode);
                 }else{
+                    swan.hideLoading()
                     swan.setStorageSync('proValueCode','');
                     swan.setStorageSync('cityValueCode','' );
                     swan.setStorageSync('areaValueCode', '');
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
             },
             fail: (err) => {
+                swan.hideLoading()
                 console.log(res.data);
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
@@ -92,8 +104,11 @@ Page({
     },
     getCode() {
         var that = this;
+        swan.showLoading({
+            title: '加载中',
+        })
         swan.request({
-            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -110,7 +125,11 @@ Page({
                         provinces:arr,
                         provincesCodes:arrCode
                     })
-                    
+                    swan.hideLoading()
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
             },
             fail: (err) => {
@@ -123,8 +142,11 @@ Page({
 // 根据省份选择城市
     selectProCode(val) {
         var that = this;
+        swan.showLoading({
+            title: '加载中',
+        })
         swan.request({
-            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -146,7 +168,13 @@ Page({
                         cityArrs:arr,
                         cityCodess:arrCode
                     })
+                    swan.hideLoading()
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
+                
             },
             fail: (err) => {
                 console.log(res.data);
@@ -158,8 +186,11 @@ Page({
     // 根据城市选择区域
     selectCityCode(areaval) {
         var that = this;
+        swan.showLoading({
+            title: '加载中',
+        })
         swan.request({
-            url: `${domin.testdom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/getCode` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -180,7 +211,14 @@ Page({
                         areaArr:arr,
                         areaCodess:arrCode
                     })
-                    swan.setStorageSync('areaValueCode',that.data.areaCodess[0]);
+                    if(swan.getStorageSync('areaValueCode') ==''){
+                        swan.setStorageSync('areaValueCode',that.data.areaCodess[0]);
+                    }
+                    swan.hideLoading()
+                }else{
+                    swan.showToast({
+                        title:res.data.error_msg
+                    })
                 }
             },
             fail: (err) => {
@@ -210,7 +248,7 @@ Page({
     //         return false
     //     }
     //     swan.request({
-    //         url: `${domin.testdom}/mall/user/address/addByName` , // 仅为示例，并非真实的接口地址
+    //         url: `${domin.dom}/mall/user/address/addByName` , // 仅为示例，并非真实的接口地址
     //         method: 'POST',
     //         dataType: 'json',
     //         header: {
@@ -235,6 +273,9 @@ Page({
     // },
     postAddress(){
         var that = this;
+        swan.showLoading({
+            title: '加载中',
+        })
         var objAddress = {
             name: this.data.name,
             phone: this.data.phone,
@@ -279,7 +320,7 @@ Page({
             return false
         }
         swan.request({
-            url: `${domin.testdom}/mall/user/address/post`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/post`, // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             header: {
@@ -293,6 +334,7 @@ Page({
                     swan.navigateBack({
                         delta:1
                     });
+                    swan.hideLoading()
                 }else{
                     swan.showToast({
                         title:res.data.error_msg
@@ -323,6 +365,7 @@ Page({
         swan.setStorageSync('proValueCode',proValueCode);
         console.log(proValueCode)
         this.selectProCode(swan.getStorageSync('proValueCode'))
+        // this.selectCityCode(this.data.cityCodess[0])
     },
     // chooseCity(){
     //     this.selectCityCode(swan.getStorageSync('cityValueCode'))
@@ -348,6 +391,7 @@ Page({
         });
         var areaValueCode = this.data.areaCodess[e.detail.value]
         swan.setStorageSync('areaValueCode',areaValueCode);
+        
     },
     bindPhoneInput: function (e) {
         this.setData({

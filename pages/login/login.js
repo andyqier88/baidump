@@ -24,7 +24,7 @@ Page({
     onLoad: function () {
         console.log(this.data)
         console.log(domin.dom)
-        console.log(domin.testdom)
+        console.log(domin.dom)
     },
     clickTab1() { 
         this.setData({
@@ -39,7 +39,7 @@ Page({
         })
     },
     userAgreement(){
-        var linkData = `${domin.testdom}/html/userAgreement.html`
+        var linkData = `${domin.dom}/html/userAgreement.html`
         swan.navigateTo({
             url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
         })
@@ -84,7 +84,7 @@ Page({
         var str = string.substr(0, string.length - 1);
         var md5ed = md5(str)
         swan.request({
-            url: `${domin.testdom}/user/common/getcaptcha` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/user/common/getcaptcha` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -161,7 +161,7 @@ Page({
             return false;
         }
         swan.request({
-            url:`${domin.testdom}/user/common/login`, // 仅为示例，并非真实的接口地址
+            url:`${domin.dom}/user/common/login`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -240,7 +240,7 @@ Page({
             return false;
         }
         swan.request({
-            url:`${domin.testdom}/user/common/login` , // 仅为示例，并非真实的接口地址
+            url:`${domin.dom}/user/common/login` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {

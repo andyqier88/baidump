@@ -54,17 +54,17 @@
     }
   .price {
     color: #cea068;
-    font-size: 0.2rem;
+    font-size: 0.15rem;
     font-weight: 400; 
   }
   .cost_price {
     color: #c7c7c7;
-    font-size: 0.24rem;
+    font-size: 0.16rem;
     text-decoration: line-through;
     font-weight: 100;
   }
   .goods {
-    padding: 0.2rem;
+    padding: 0.1rem;
     
   }
   div {

@@ -45,8 +45,8 @@
 			<view class="total-price">共<text>{{cartItem.c_num}}</text>件商品 实付（含运费）<text>{{item.o_pay}}</text></view>
 			<!-- 交易取消 -->
 			<view s-if="item.o_status == '11'" class="user-confim">
-				<view bind:tap="delOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}">删除订单</view>
-				<view class="getDeli" bind:tap="submitOrder" data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}">重新购买</view>
+				<view bind:tap="delOrder" data-inx="{{index}}" data-oid="{{cartItem.o_id}}" data-osn="{{item.o_sn}}">删除订单</view>
+				<view class="getDeli" bind:tap="gotoDetail" data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}">重新购买</view>
 			</view>
 			<!-- 待付款 -->
 			<view s-else-if="item.o_status == '0'" class="user-confim">
@@ -66,13 +66,13 @@
 			</view>
 			<!-- 已收货/交易完成 -->
 			<view s-else-if="item.o_status == '3'" class="user-confim">
-				<view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
+				<!-- <view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view> -->
 				<!-- <view>联系卖家</view> -->
 			</view>
 			<!-- 交易取消 -->
             <view s-else-if="item.o_status == '11'" class="user-confim">
               <view bind:tap="delOrder" data-inx="{{index}}" data-osn="{{item.o_sn}}">删除订单</view>
-              <view class="getDeli"  data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}" bind:tap="submitOrder">重新购买</view>
+              <view class="getDeli"  data-osn="{{item.o_sn}}" data-gid="{{item.g_id}}" bind:tap="gotoDetail">重新购买</view>
             </view>
 			<!-- 退款申请中 -->
 			<view s-else-if="item.o_status == '21'" class="user-confim">

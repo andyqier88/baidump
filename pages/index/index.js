@@ -12,9 +12,25 @@ Page({
             "https://zhangwan-picture-prod.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/mall_ad_images/201809/30/JFFQY7tp5z.png"
         ]
     },
-    onLoad: function () {
+    onShow: function () {
+        this.getBanner()
+        this.getdiscoverList();
+        this.hotActive();
+        this.getV2Category();
+    },
+    errorImg(e){
+        console.log(e)
+    },
+    gotoZizhi(){
+        var linkData = "https://app.16988.cn/html/apph5/organiZation.html#/index"
+        swan.navigateTo({
+            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
+        })
+    },
+    // banner
+    getBanner(){
         swan.request({
-            url: `${domin.testdom}/common/ad/lists` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/common/ad/lists` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             data: {
@@ -34,23 +50,11 @@ Page({
                 console.log('错误信息：' + err.errMsg);
             }
         })
-        this.getdiscoverList();
-        this.hotActive();
-        this.getV2Category();
-    },
-    errorImg(e){
-        console.log(e)
-    },
-    gotoZizhi(){
-        var linkData = "https://app.16988.cn/html/apph5/organiZation.html#/index"
-        swan.navigateTo({
-            url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}`
-        })
     },
     // 分类获取
     getV2Category(){
         swan.request({
-            url: `${domin.testdom}/mall/goods/category/h5shop` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/goods/category/h5shop` , // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -77,7 +81,7 @@ Page({
     // 热门活动
     hotActive() {
         swan.request({
-            url: `${domin.testdom}/common/ad/lists?mark=22`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/common/ad/lists?mark=22`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -108,7 +112,7 @@ Page({
     // 推荐
     getdiscoverList() {
         swan.request({
-            url: `${domin.testdom}/mall/goods/item/getWxRecommendGoods`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/goods/item/getWxRecommendGoods`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {
@@ -137,7 +141,9 @@ Page({
     },
     onPullDownRefresh: function(e) {
 		// Do something when pull down.
+        this.getBanner()
         this.hotActive();
         this.getdiscoverList();
+        this.getV2Category()
 	},
 });

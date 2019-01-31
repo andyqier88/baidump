@@ -41,7 +41,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: `${domin.testdom}/mall/goods/item/detail` , //仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/goods/item/detail` , //仅为示例，并非真实的接口地址
             data: {
                 id: that.data.goodsid
             },
@@ -65,7 +65,7 @@ Page({
       goodsHisAdd(){
         var that = this;
         swan.request({
-            url: `${domin.testdom}/user/visit/goodsHisAdd` , //仅为示例，并非真实的接口地址
+            url: `${domin.dom}/user/visit/goodsHisAdd` , //仅为示例，并非真实的接口地址
             data: {
                 gid: that.data.goodsid
             },
@@ -90,7 +90,7 @@ Page({
     hidecs(){
         var that = this;
         swan.request({
-            url: `${domin.testdom}/common/ui/isShow` , //仅为示例，并非真实的接口地址
+            url: `${domin.dom}/common/ui/isShow` , //仅为示例，并非真实的接口地址
             data: {
                 id: "baidu_mini_goods_detail_custom_service_button"
             },

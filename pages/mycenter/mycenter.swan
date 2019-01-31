@@ -9,7 +9,7 @@
         <view s-else class="top-head">
             <view s-if="myInfos.u_avatar" class="avatar" style="background: url({{myInfos.u_avatar}});background-size: cover;background-repeat: no-repeat;">
                 <view class="level">
-                    <image src="../../images/v.png" alt="">
+                    <image src="../../images/v.png" alt=""></image>
                 </view>
             </view>
             <view s-else class="avatar defauet-avatar">

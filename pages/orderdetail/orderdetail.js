@@ -31,7 +31,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: `${domin.testdom}/mall/order/order/detail`, //仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/order/detail`, //仅为示例，并非真实的接口地址
             data: {
                 sn: that.data.ordersn,
                 type: 1,
@@ -57,7 +57,7 @@ Page({
     getAddress() {
         var that = this;
         swan.request({
-            url: `${domin.testdom}/mall/user/address/lists` , //仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/user/address/lists` , //仅为示例，并非真实的接口地址
             method: 'GET',
             data: {
                 uid: swan.getStorageSync('loginData').u_id,
@@ -94,7 +94,7 @@ Page({
         console.log(e)
         var that = this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
+            url: 'https://app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
             method: 'POST',
             data: {
                 payChannel: 9,
@@ -147,7 +147,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: `${domin.testdom}/mall/order/order/cancel` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/order/cancel` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -194,7 +194,7 @@ Page({
             mask: true
         });
         swan.request({
-            url: `${domin.testdom}/mall/order/order/deleteOrder` , // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/order/order/deleteOrder` , // 仅为示例，并非真实的接口地址
             method: 'POST',
             dataType: 'json',
             data: {
@@ -231,11 +231,56 @@ Page({
             }
         })
     },
+    // 确认收货
+    getGoods(e) {
+        var that = this;
+        swan.showLoading({
+            title: '加载中',
+            mask: true
+        });
+        console.log(e.currentTarget.dataset.osn)
+        swan.request({
+            url: `${domin.dom}/mall/order/buyer/finish`, // 仅为示例，并非真实的接口地址
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                osn: e.currentTarget.dataset.osn
+            },
+            header: {
+                'content-type': 'application/x-www-form-urlencoded', // 默认值
+                'cookie': swan.getStorageSync('ZWCOOKIES')
+            },
+            success: (res) => {
+                console.log(res.data);
+                if (res.data.error_code == 0) {
+                    swan.showToast({
+                        title: "已确认收货",
+                    })
+                    that.getDetail()
+                    swan.hideLoading()
+                } else {
+                    swan.showToast({
+                        title: res.data.error_msg,
+                    })
+                    swan.hideLoading()
+                }
+            },
+            fail: (err) => {
+                console.log('错误码：' + err.errCode);
+                console.log('错误信息：' + err.errMsg);
+            }
+        })
+    },
     // 联系客服
     gotoKefu(){
         var linkData = 'https://p.qiao.baidu.com/cps/chat?siteId=12769985&userId=26746183'
         swan.navigateTo({
             url: `/pages/banner/banner?link=${encodeURIComponent(linkData)}` 
         })
-    }
+    },
+    goDetail(e){
+        swan.navigateTo({
+            url: `/pages/detail/detail?link=${e.currentTarget.dataset.gid}`
+        })
+    },
 });

@@ -64,8 +64,12 @@ Page({
             currentPage: that.data.currentPage++
         })
         that.data.currentPage++
-        this.getdiscoverList(that.data.currentPage, 10)
-
+        // this.getdiscoverList(that.data.currentPage, 10)
+        if(this.data.priceOrder){
+            this.getdiscoverList(that.data.currentPage,10,1)
+        }else{
+            this.getdiscoverList(that.data.currentPage,10,2)
+        }
     },
     init() {
         console.log("init")
@@ -114,7 +118,7 @@ Page({
             secJson.highPrice = this.data.highPrice;
         }
         swan.request({
-            url: `${domin.testdom}/mall/goods/item/listsWxH5`, // 仅为示例，并非真实的接口地址
+            url: `${domin.dom}/mall/goods/item/listsWxH5`, // 仅为示例，并非真实的接口地址
             method: 'GET',
             dataType: 'json',
             header: {

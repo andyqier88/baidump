@@ -61,8 +61,8 @@
 	<!--商品详情类别 件数  -->
 	<view class='detail-des'>
 		<text s-if="{{detailData.g_inspiration}}">
-    	{{detailData.g_inspiration}}
-  	</text>
+			{{detailData.g_inspiration}}
+		</text>
 		<view s-for="item in detailDataImg">
 			<image mode='widthFix' src="{{item.gi_img}}" class="slide-image" style="width: 100%;" />
 		</view>

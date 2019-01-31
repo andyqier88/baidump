@@ -30,7 +30,8 @@ Page({
         aid: '',//地址id
         goodCountFromStro: 1,
         goodsid: '',
-        goodsname: ''
+        goodsname: '',
+        payFailState:true
     },
 
     // 详情数据加载
@@ -40,7 +41,7 @@ Page({
         })
         var that = this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/goods/item/detail', //仅为示例，并非真实的接口地址
+            url:`${domin.dom}/mall/goods/item/detail` , //仅为示例，并非真实的接口地址
             data: {
                 id: that.data.goodsid
             },
@@ -68,7 +69,7 @@ Page({
     getAddress() {
         var that = this;
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/user/address/lists', //仅为示例，并非真实的接口地址
+            url: 'https://app.16988.cn/mall/user/address/lists', //仅为示例，并非真实的接口地址
             method: 'GET',
             data: {
                 uid: swan.getStorageSync('loginData').u_id,
@@ -105,9 +106,13 @@ Page({
                                 }
                             }
                         });
-                        swan.setStorageSync('proValueCode','');
-                        swan.setStorageSync('cityValueCode','' );
+                        swan.setStorageSync('proValueCode', '');
+                        swan.setStorageSync('cityValueCode', '');
                         swan.setStorageSync('areaValueCode', '');
+                    }else{
+                        swan.setStorageSync('proValueCode', res.data.data[0].a_provinceCode);
+                        swan.setStorageSync('cityValueCode', res.data.data[0].a_cityCode);
+                        swan.setStorageSync('areaValueCode', res.data.data[0].a_areaCode);
                     }
                 }
             }
@@ -127,18 +132,12 @@ Page({
         })
     },
     // 用户留言
-    bindLeaveInput (e) {
+    bindLeaveInput(e) {
         this.setData({
             leaveWord: e.detail.value
         });
     },
-    // 跳转首页
-    gotoIndex: function () {
-        console.log('gotoIndex')
-        swan.switchTab({
-            url: '../index/index'
-        })
-    },
+    // 选择地址
     choAddress() {
         swan.navigateTo({
             url: '/pages/address/address'
@@ -187,14 +186,14 @@ Page({
     // 提交订单
     submitOrder() {
         var that = this;
-        if(!that.data.isAddressNull){
+        if (!that.data.isAddressNull) {
             swan.showToast({
-                title:'地址不能为空'
+                title: '地址不能为空'
             })
             return false
         }
         swan.request({
-            url: 'https://dev-app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
+            url: 'https://app.16988.cn/mall/order/buyer/add', //仅为示例，并非真实的接口地址
             method: 'POST',
             data: {
                 uid: '',
@@ -210,7 +209,7 @@ Page({
             success: function (res) {
                 if (res.data.error_code == 0) {
                     swan.request({
-                        url: 'https://dev-app.16988.cn/mall/order/pay/get', //仅为示例，并非真实的接口地址
+                        url: 'https://app.16988.cn/mall/order/pay/get', //仅为示例，并非真实的接口地址
                         method: 'POST',
                         data: {
                             tradeId: res.data.data.order_id,
@@ -226,7 +225,7 @@ Page({
                         success: function (res1) {
                             if (res1.data.error_code == 0) {
                                 swan.request({
-                                    url: 'https://dev-app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
+                                    url: 'https://app.16988.cn/mall/order/pay/init', //仅为示例，并非真实的接口地址
                                     method: 'POST',
                                     data: {
                                         payChannel: 9,
@@ -242,9 +241,12 @@ Page({
                                         var resw = res2.data.data.payInfo9
                                         console.log(resw)
                                         if (res2.data.error_code == 0) {
+                                            that.setData({
+                                                        payFailState:false
+                                                    })
                                             swan.requestPolymerPayment({
                                                 orderInfo: resw,
-                                                bannedChannels:['BDWallet'],
+                                                bannedChannels: ['BDWallet'],
                                                 success: function (resp) {
                                                     swan.showToast({
                                                         title: '支付成功',
@@ -257,16 +259,19 @@ Page({
                                                         duration: 2000
                                                     });
                                                     console.log('pay fail', err);
+                                                    that.setData({
+                                                        payFailState:false
+                                                    })
                                                 }
                                             });
                                         }
                                     }
                                 });
-                            }else{
-                               swan.showModal({
-                                    content:res1.data.error_msg,
+                            } else {
+                                swan.showModal({
+                                    content: res1.data.error_msg,
                                     duration: 2000,
-                                    complete:function(){
+                                    complete: function () {
                                         swan.navigateTo({
                                             url: '/pages/myorder/myorder'
                                         });
@@ -276,12 +281,17 @@ Page({
                         }
                     });
                     swan.hideLoading()
-                }else{
+                } else {
                     swan.showToast({
-                        title:res.data.error_msg
+                        title: res.data.error_msg
                     })
                 }
             }
+        });
+    },
+    gotoOrderDetail() {
+        swan.navigateTo({
+            url: '/pages/myorder/myorder'
         });
     },
     /**

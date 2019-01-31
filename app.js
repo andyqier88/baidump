@@ -11,6 +11,7 @@ App({
 
     globalData: {
         userInfo: 'user',
-        goodCount:1
+        goodCount:1,
+        domins:"https://dev-app.16988.com"
     }
 });
